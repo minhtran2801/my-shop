@@ -12,6 +12,7 @@ exports.signup = (req, res) => {
       });
     }
 
+    // Make salt and hashed password invisible in json response
     user.salt = undefined;
     user.hashed_password = undefined;
 
