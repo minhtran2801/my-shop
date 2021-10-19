@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const { v1: uuidv1 } = require("uuid");
-const { timeStamp } = require("console");
 
 const userSchema = new mongoose.Schema(
   {
@@ -36,7 +35,7 @@ const userSchema = new mongoose.Schema(
       default: [],
     },
   },
-  { timeStamp: true }
+  { timestamps: true }
 );
 
 // virtual field
