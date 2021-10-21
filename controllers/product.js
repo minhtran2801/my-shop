@@ -3,18 +3,28 @@ const formidable = require("formidable");
 const fs = require("fs");
 const _ = require("lodash");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const product = require("../models/product");
 
+// MIDDLEWARES
 exports.productById = (req, res, next, id) => {
   Product.findById(id).exec((err, product) => {
     if (err || !product) {
       return res.status(400).json({ error: "Product does not exist" });
     }
-
     req.product = product;
     next();
   });
 };
 
+exports.sendProductPhoto = (req, res, next) => {
+  if (req.product.photo.data) {
+    res.set("Content-Type", req.product.photo.contentType);
+    return res.send(req.product.photo.data);
+  }
+  next();
+};
+
+// CRUD Operations
 exports.createProduct = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -155,4 +165,101 @@ exports.deleteProduct = (req, res) => {
     }
     res.json({ message: `${deletedProduct.name} deleted successfully.` });
   });
+};
+
+/**
+ * Most popular/ new arrival product
+ * most popular = /products?sortBy=soldItems&order=desc&limit=4
+ * new arrival = /products?sortBy=createdat&order=desc&limit=4
+ * no params = return all products
+ */
+exports.listProduct = (req, res) => {
+  let order = req.query.order ? req.query.order : "asc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  let limit = req.query.limit ? parseInt(req.query.limit) : 3;
+
+  // Select all product details EXCEPT for photos to increase performance
+  Product.find()
+    .select("-photo")
+    .populate("category")
+    .sort([[sortBy, order]])
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({ error: "Products not found" });
+      }
+      res.json(products);
+    });
+};
+
+exports.listRelatedProducts = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+  Product.find({ _id: { $ne: req.product }, category: req.product.category })
+    .limit(limit)
+    .populate("category", "_id name")
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({ error: "Products not found" });
+      }
+      res.json(products);
+    });
+};
+
+exports.listCategories = (req, res) => {
+  Product.distinct("category", {}, (err, categories) => {
+    if (err) {
+      return res.status(400).json({ error: "Products not found" });
+    }
+    res.json(categories);
+  });
+};
+
+/**
+ * Apply filters to search for products
+ * Allow users to filter by categories (using checkbox) and price range using radio buttons
+ * User click "apply" to search for products
+ * skip for load more button
+ * @param {categories, priceRange} req
+ * @param { products} res
+ */
+exports.searchProducts = (req, res) => {
+  let order = req.body.order ? req.body.order : "asc";
+  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let filtersArgs = {};
+
+  //console.log(order, sortBy, limit, skip, req.body.filters);
+
+  // Check for applied filters
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      if (key === "price") {
+        filtersArgs[key] = {
+          $gte: req.body.filters[key][0],
+          $lte: req.body.filters[key][1],
+        };
+      } else {
+        filtersArgs[key] = req.body.filters[key];
+      }
+    }
+  }
+
+  //console.log("filtersArgs", skip);
+  Product.find(filtersArgs)
+    .select("-photo")
+    .populate("category")
+    .sort([[sortBy, order]])
+    .limit(limit)
+    .skip(skip)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({ error: "Products not found" });
+      }
+      res.json({
+        size: products.length,
+        products,
+      });
+    });
 };
