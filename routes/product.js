@@ -5,6 +5,11 @@ const {
   readProduct,
   updateProduct,
   deleteProduct,
+  listProduct,
+  listRelatedProducts,
+  listCategories,
+  searchProducts,
+  sendProductPhoto,
   productById,
 } = require("../controllers/product");
 const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
@@ -35,6 +40,12 @@ router.put(
   isAdmin,
   updateProduct
 );
+
+router.get("/products", listProduct);
+router.get("/products/related/:productId", listRelatedProducts);
+router.get("/products/categories", listCategories);
+router.post("/products/by/search", searchProducts);
+router.get("/products/photo/:productId", sendProductPhoto);
 
 router.param("userId", userById);
 router.param("productId", productById);

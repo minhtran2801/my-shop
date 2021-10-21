@@ -10,3 +10,27 @@ exports.userById = (req, res, next, id) => {
     next();
   });
 };
+
+exports.readUser = (req, res) => {
+  req.profile.hashed_password = undefined;
+  req.profile.salt = undefined;
+  return res.json(req.profile);
+};
+
+exports.updateUser = (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $set: req.body },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ error: "You are not authorized to update this profile" });
+      }
+      req.profile.hashed_password = undefined;
+      req.profile.salt = undefined;
+      return res.json(user);
+    }
+  );
+};
