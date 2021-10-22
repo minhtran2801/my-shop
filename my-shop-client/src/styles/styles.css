@@ -1,0 +1,58 @@
+.nav-item {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+}
+
+.nav-searchBar {
+  width: 39%;
+}
+.nav-icons {
+  width: 100%;
+  margin-bottom: 10px;
+  color: #b0aeae;
+  font-size: 28px;
+}
+
+.vr {
+  color: white;
+  height: 28px;
+  margin-top: 12px;
+  opacity: 100;
+}
+
+.sr-only {
+  position: absolute;
+  margin: -1px 0 0 -1px;
+  padding: 0;
+  display: block;
+  width: 1px;
+  height: 1px;
+  font-size: 1px;
+  line-height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  outline: 0;
+}
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  text-indent: 30px;
+  margin-top: 10px;
+}
