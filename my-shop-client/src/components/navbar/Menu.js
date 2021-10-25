@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import logo from "../assets/logo/logo.png";
+import logo from "../../assets/logo/logo.png";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -15,9 +15,9 @@ const isActive = (history, path) => {
 };
 
 const Menu = ({ history }) => (
-  <div className="bg-dark">
+  <div className="sticky-top bg-dark">
     <div className="container nav-container">
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/">
           <img
             src={logo}
@@ -53,44 +53,48 @@ const Menu = ({ history }) => (
         </button>
 
         <div className="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul className="navbar-nav text-center ms-auto hstack gap-3">
-            <li className="nav-item active">
-              <Link className="nav-link" style={isActive(history, "/")} to="/">
+          <ul className="navbar-nav flex-row flex-wrap   ms-md-auto text-center justify-content-center align-items-center">
+            <li className="nav-item col-5 col-md-auto active">
+              <Link
+                className="nav-link p-2"
+                style={isActive(history, "/")}
+                to="/"
+              >
                 Home<span className="sr-only">(current)</span>
               </Link>
             </li>
-            <div className="vr"></div>
-            <li className="nav-item">
+
+            <li className="nav-item col-5 col-md-auto ">
               <Link
-                className="nav-link"
+                className="nav-link p-2"
                 style={isActive(history, "/about")}
                 to="/"
               >
                 About
               </Link>
             </li>
-            <div className="vr"></div>
-            <li className="nav-item">
+
+            <li className="nav-item col-5 col-md-auto ">
               <Link
-                className="nav-link"
+                className="nav-link p-2"
                 style={isActive(history, "/products")}
                 to="/products"
               >
                 Shop
               </Link>
             </li>
-            <div className="vr"></div>
-            <li className="nav-item">
+
+            <li className="nav-item col-5 col-md-auto ">
               <Link
-                className="nav-link"
+                className="nav-link p-2"
                 style={isActive(history, "/contact")}
                 to="/contact"
               >
                 Contact Us
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signin">
+            <li className="nav-item col-5 col-md-auto ">
+              <Link className="nav-link p-2" to="/signin">
                 <div>
                   <i
                     className="fas fa-user nav-icons"
@@ -99,8 +103,8 @@ const Menu = ({ history }) => (
                 </div>
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
+            <li className="nav-item col-5 col-md-auto ">
+              <Link className="nav-link p-2" to="/cart">
                 <div>
                   <i
                     className="fas fa-shopping-cart nav-icons"
