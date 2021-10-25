@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Signup from "./user/Signup";
-import Signin from "./user/Signin";
-import Home from "./core/Home";
-import Menu from "./core/Menu";
+import Signup from "./components/navbar/Signup";
+import Signin from "./components/navbar/Signin";
+import Home from "./components/homepage/Home";
+import Menu from "./components/navbar/Menu";
 
 const Routes = () => {
   return (

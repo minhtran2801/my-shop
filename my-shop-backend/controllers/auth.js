@@ -4,20 +4,17 @@ const expressjwt = require("express-jwt"); // for authorization check
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.signup = (req, res) => {
-  const user = new User(req.body);
-  user.save((err, user) => {
+  const { l_name, f_name, email, password } = req.body;
+  let newUser = new User({ l_name, f_name, email, password });
+
+  newUser.save((err, success) => {
     if (err) {
       return res.status(400).json({
-        err: errorHandler(err),
+        error: err,
       });
     }
-
-    // Make salt and hashed password invisible in json response
-    user.salt = undefined;
-    user.hashed_password = undefined;
-
     res.json({
-      user,
+      message: "Signup success! Please signin.",
     });
   });
 };
