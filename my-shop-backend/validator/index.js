@@ -20,6 +20,8 @@ exports.signupValidation = [
 
   check("email")
     .trim()
+    .escape()
+    .normalizeEmail()
     .not()
     .isEmpty()
     .withMessage("Your email cannot be empty")
@@ -38,26 +40,20 @@ exports.signupValidation = [
 
   check("password")
     .trim()
+    .escape()
     .not()
     .isEmpty()
     .withMessage("Your password cannot be empty")
     .bail()
-    .isLength({ min: 6, max: 20 })
-    .withMessage("Your password should be between 6 to 20 characters")
+    .isLength({ min: 6 })
+    .withMessage("Your password must have 6 characters mininum")
     .bail()
-    .matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$")
-    .withMessage(
-      `Your password needs:
-      • Minimum 6 and maximum 20 characters 
-      • At least 1 UPPERCASE english letter 
-      • At least 1 lowercase english letter 
-      • At least 1 number`
-    )
+    .matches("[0-9]")
+    .withMessage("A number is required")
     .bail()
-    .custom((password, { req }) => {
-      return password == req.body.confirm_password;
-    })
-    .withMessage("Passwords do not match. Please try again"),
+    .matches("[A-Z]")
+    .withMessage("Password must contain an uppercase letter")
+    .bail(),
 
   (req, res, next) => {
     const validationRes = validationResult(req);

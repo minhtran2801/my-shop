@@ -1,6 +1,6 @@
 import React from "react";
 
-const Banner = () => {
+const HeroImage = () => {
   return (
     <div className="hero">
       <div className="hero-content">
@@ -22,4 +22,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default HeroImage;

@@ -14,7 +14,7 @@ const isActive = (history, path) => {
   }
 };
 
-const Menu = ({ history }) => (
+const Navbar = ({ history }) => (
   <div className="sticky-top bg-dark">
     <div className="container nav-container">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -120,4 +120,4 @@ const Menu = ({ history }) => (
   </div>
 );
 
-export default withRouter(Menu);
+export default withRouter(Navbar);

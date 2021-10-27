@@ -1,10 +1,10 @@
 import React from "react";
-import Menu from "../Navbar/Menu";
+import Navbar from "../Navbar/Navbar";
 
 const AuthLayout = ({ children }) => {
   return (
     <div>
-      <Menu />
+      <Navbar />
       <div className="auth">
         <div className="bg-image"></div>
         <div className="form-box">{children}</div>
