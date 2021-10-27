@@ -8,8 +8,8 @@ const Signup = () => {
     f_name: "",
     l_name: "",
     password: "",
-    confirm_password: "",
     email: "",
+    showPassword: false,
     f_name_error: "",
     l_name_error: "",
     password_error: "",
@@ -22,7 +22,7 @@ const Signup = () => {
     l_name,
     email,
     password,
-    confirm_password,
+    showPassword,
     f_name_error,
     l_name_error,
     email_error,
@@ -32,6 +32,14 @@ const Signup = () => {
 
   const handleChange = (element_name) => (event) => {
     setValues({ ...values, [element_name]: event.target.value });
+  };
+
+  const handleShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const onCopyPaste = (event) => {
+    event.preventDefault();
   };
 
   const emptyAllFields = () => {
@@ -45,7 +53,6 @@ const Signup = () => {
       l_name_error: "",
       email_error: "",
       password_error: "",
-      confirm_password: "",
       success: true,
     });
   };
@@ -58,7 +65,6 @@ const Signup = () => {
       l_name: l_name,
       email: email,
       password: password,
-      confirm_password: confirm_password,
     }).then((data) => {
       console.log(data);
       if (data.errors) {
@@ -70,7 +76,6 @@ const Signup = () => {
           password_error: data.password,
           email: data.email.length > 0 ? "" : email,
           password: data.password.length > 0 ? "" : "",
-          confirm_password: data.password.length > 0 ? "" : "",
           success: false,
         });
       } else {
@@ -90,6 +95,7 @@ const Signup = () => {
               </h2>
 
               <form>
+                {/* FIRST NAME */}
                 <div className="form-outline mb-4">
                   <label
                     htmlFor="inputFirstName"
@@ -110,9 +116,14 @@ const Signup = () => {
                     onChange={handleChange("f_name")}
                   />
                   {f_name_error.length > 0 && (
-                    <span className="invalidText">{f_name_error}</span>
+                    <span className="form-text invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {f_name_error}
+                    </span>
                   )}
                 </div>
+                {/* LAST NAME */}
                 <div className="form-outline mb-4">
                   <label
                     htmlFor="inputLastName"
@@ -133,9 +144,14 @@ const Signup = () => {
                     onChange={handleChange("l_name")}
                   />
                   {f_name_error.length > 0 && (
-                    <span className="invalidText">{f_name_error}</span>
+                    <span className="form-text invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {f_name_error}
+                    </span>
                   )}
                 </div>
+                {/* EMAIL */}
                 <div className="form-outline mb-4">
                   <label
                     htmlFor="inputEmail"
@@ -160,9 +176,14 @@ const Signup = () => {
                     We'll never share your email with anyone else.
                   </div>
                   {email_error.length > 0 && (
-                    <span className="invalidText">{email_error}</span>
+                    <span className="form-text invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {email_error}
+                    </span>
                   )}
                 </div>
+                {/* PASSWORD */}
                 <div className="form-outline mb-4">
                   <label
                     htmlFor="inputPassword"
@@ -172,60 +193,67 @@ const Signup = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type="password"
-                    className={`form-control  ${
-                      password_error.length > 0
-                        ? "invalidBorder"
-                        : "validBorder"
-                    }`}
-                    id="inputPassword"
-                    aria-describedby="passwordHelp"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={handleChange("password")}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className={`form-control  ${
+                        password_error.length > 0
+                          ? "invalidBorder"
+                          : "validBorder"
+                      }`}
+                      id="inputPassword"
+                      aria-describedby="passwordHelp"
+                      placeholder="Enter password"
+                      value={password}
+                      onChange={handleChange("password")}
+                      onCopy={onCopyPaste}
+                      onPaste={onCopyPaste}
+                      onCut={onCopyPaste}
+                    />
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="showPassword"
+                      onClick={handleShowPassword}
+                    >
+                      <i
+                        className={`fas fa-eye ${
+                          showPassword ? "d-none" : "d-inline-block"
+                        }`}
+                        id="show_eye"
+                      ></i>
+                      <i
+                        className={`fas fa-eye-slash ${
+                          showPassword ? "d-inline-block" : "d-none"
+                        }`}
+                        id="hide_eye"
+                      ></i>
+                    </button>
+                  </div>
                   <div
                     id="passwordHelp"
                     className={`form-text ${
                       password_error.length > 0 ? "d-none" : "d-inline"
                     }`}
                   >
-                    Your password needs: <br />
-                    • Minimum 6 and maximum 20 characters
-                    <br />
-                    • At least 1 UPPERCASE english letter
-                    <br />
-                    • At least 1 lowercase english letter
-                    <br />• At least 1 number
+                    <div className="row">
+                      <div className="col">
+                        {" "}
+                        • Minimum 6 character
+                        <br />• 1 number
+                      </div>
+                      <div className="col">
+                        • 1 lowercase character
+                        <br />• 1 uppercase character
+                      </div>
+                    </div>
                   </div>
                   {password_error.length > 0 && (
-                    <span className="invalidText">{password_error}</span>
-                  )}
-                </div>
-                <div className="form-outline mb-4">
-                  <label
-                    htmlFor="inputPasswordConfirmation"
-                    className={`form-label ${
-                      password_error.length > 0 ? "invalidText" : "validText"
-                    }`}
-                  >
-                    Confirm password
-                  </label>
-                  <input
-                    type="password"
-                    className={`form-control  ${
-                      password_error.length > 0
-                        ? "invalidBorder"
-                        : "validBorder"
-                    }`}
-                    id="inputPasswordConfirmation"
-                    placeholder="Confirm password"
-                    value={confirm_password}
-                    onChange={handleChange("confirm_password")}
-                  />
-                  {password_error.length > 0 && (
-                    <span className="invalidText">{password_error}</span>
+                    <span className="form-text invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {password_error}
+                    </span>
                   )}
                 </div>
 
@@ -233,7 +261,7 @@ const Signup = () => {
                   <button
                     onClick={clickSubmit}
                     type="button"
-                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-dark w-100"
+                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
                     Register
                   </button>

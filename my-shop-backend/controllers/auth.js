@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken"); // to generate signed tokens
 const expressjwt = require("express-jwt"); // for authorization check
-const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.signup = (req, res) => {
   const { l_name, f_name, email, password } = req.body;
@@ -24,7 +23,7 @@ exports.signin = (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email }, (err, user) => {
     if (err || !user) {
-      return res.status(400).json({ err: "Invalid username or password" });
+      return res.status(400).json({ error: "Invalid username or password" });
     }
     // if found user, check username and password
     // create authenticate method in user model

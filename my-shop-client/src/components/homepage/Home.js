@@ -1,6 +1,9 @@
 import React from "react";
-import Banner from "./Banner";
+import HeroImage from "./HeroImage";
+import HomeLayout from "../Layout/HomeLayout";
 
-const Home = () => <Banner />;
+const Home = () => {
+  return <HomeLayout>{<HeroImage />}</HomeLayout>;
+};
 
 export default Home;

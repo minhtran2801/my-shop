@@ -6,13 +6,18 @@ const Signin = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
+    showPassword: false,
     error: "",
   });
 
-  const { email, password, error, success } = values;
+  const { email, password, error, showPassword } = values;
 
   const handleChange = (element_name) => (event) => {
     setValues({ ...values, [element_name]: event.target.value });
+  };
+
+  const handleShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
   };
 
   const emptyAllFields = () => {
@@ -22,13 +27,17 @@ const Signin = () => {
       email: "",
       password: "",
       error: "",
-      success: true,
+      showPassword: false,
     });
   };
 
-  const clickSubmit = (event) => {
+  const onCopyPaste = (event) => {
     event.preventDefault();
-    console.log("F", values);
+  };
+
+  const onClickSubmit = (event) => {
+    event.preventDefault();
+    console.log("Login", values);
     signInUser({
       email: email,
       password: password,
@@ -37,8 +46,9 @@ const Signin = () => {
       if (data.error) {
         setValues({
           ...values,
+          email: "",
+          password: "",
           error: data.error,
-          success: false,
         });
       } else {
         emptyAllFields();
@@ -55,7 +65,7 @@ const Signin = () => {
               <h2 className="text-uppercase text-center mb-5">Login</h2>
 
               <form>
-                <div className="form-outline mb-4">
+                <div className="mb-4">
                   <label
                     htmlFor="inputEmail"
                     className={`form-label ${
@@ -74,8 +84,15 @@ const Signin = () => {
                     value={email}
                     onChange={handleChange("email")}
                   />
+                  {error.length > 0 && (
+                    <span className="invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {error}
+                    </span>
+                  )}
                 </div>
-                <div className="form-outline mb-4">
+                <div className="mb-4">
                   <label
                     htmlFor="inputPassword"
                     className={`form-label ${
@@ -84,30 +101,57 @@ const Signin = () => {
                   >
                     Password
                   </label>
-                  <input
-                    type="password"
-                    className={`form-control form-control-lg ${
-                      error.length > 0 ? "invalidBorder" : "validBorder"
-                    }`}
-                    id="inputPassword"
-                    aria-describedby="passwordHelp"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={handleChange("password")}
-                  />
-
+                  <div className="input-group ">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className={`form-control form-control-lg ${
+                        error.length > 0 ? "invalidBorder" : "validBorder"
+                      }`}
+                      id="inputPassword"
+                      aria-describedby="passwordHelp"
+                      placeholder="Enter password"
+                      value={password}
+                      onChange={handleChange("password")}
+                      onCopy={onCopyPaste}
+                      onPaste={onCopyPaste}
+                      onCut={onCopyPaste}
+                    />
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="showPassword"
+                      onClick={handleShowPassword}
+                    >
+                      <i
+                        className={`fas fa-eye ${
+                          showPassword ? "d-none" : "d-inline-block"
+                        }`}
+                        id="show_eye"
+                      ></i>
+                      <i
+                        className={`fas fa-eye-slash ${
+                          showPassword ? "d-inline-block" : "d-none"
+                        }`}
+                        id="hide_eye"
+                      ></i>
+                    </button>
+                  </div>
                   {error.length > 0 && (
-                    <span className="invalidText">{error}</span>
+                    <span className="invalidText">
+                      <i class="fas fa-exclamation-circle"> </i>
+                      {"   "}
+                      {error}
+                    </span>
                   )}
                 </div>
 
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
-                    onClick={clickSubmit}
+                    onClick={onClickSubmit}
                     type="button"
-                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body w-100"
+                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
-                    Sign up
+                    Login
                   </button>
                 </div>
 
