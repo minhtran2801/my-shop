@@ -1,0 +1,44 @@
+.block-title {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.box-content {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 30px;
+  display: block;
+  margin-block-start: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.box-action-edit,
+.box-action-change,
+.box-action-unsubscribe,
+.box-action-address {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 30px;
+  color: #1979c3;
+}
+
+.box-action-edit::after {
+  border-left: 1px solid black;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  margin: 0 10px;
+  vertical-align: -1px;
+}
+
+.logout {
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}

@@ -5,8 +5,15 @@
   margin-right: 20px;
 }
 
+.navbar-brand img {
+  height: auto;
+  width: auto;
+  max-height: 50px;
+  max-width: 400px;
+}
+
 .nav-searchBar {
-  width: 39%;
+  width: 40%;
 }
 .nav-icons {
   width: 100%;
@@ -37,24 +44,6 @@
   outline: 0;
 }
 
-.input-icons i {
-  position: absolute;
-}
-
-.input-icons {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.icon {
-  margin-top: 10px;
-  margin-left: 10px;
-  font-size: 20px;
-  text-align: center;
-}
-
-.input-field {
-  width: 100%;
-  text-indent: 30px;
-  margin-top: 10px;
+#search-icon {
+  background-color: white;
 }
