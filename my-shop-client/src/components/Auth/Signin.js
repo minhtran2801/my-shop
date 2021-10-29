@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthLayout from "../Layout/AuthLayout";
-import { signInUser } from "../../auth";
+import { signInUser, authenticate, isAuthenticated } from "../../api/userAuth";
+import { Redirect } from "react-router";
 
 const Signin = () => {
   const [values, setValues] = useState({
@@ -8,9 +9,13 @@ const Signin = () => {
     password: "",
     showPassword: false,
     error: "",
+    loading: false,
+    shouldRedirect: false,
   });
 
-  const { email, password, error, showPassword } = values;
+  const { email, password, showPassword, error, loading, shouldRedirect } =
+    values;
+  const { user } = isAuthenticated();
 
   const handleChange = (element_name) => (event) => {
     setValues({ ...values, [element_name]: event.target.value });
@@ -20,38 +25,28 @@ const Signin = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const emptyAllFields = () => {
-    console.log("SUCCESS");
-    setValues({
-      ...values,
-      email: "",
-      password: "",
-      error: "",
-      showPassword: false,
-    });
-  };
-
   const onCopyPaste = (event) => {
     event.preventDefault();
   };
 
-  const onClickSubmit = (event) => {
+  const onFormSubmit = (event) => {
     event.preventDefault();
-    console.log("Login", values);
     signInUser({
       email: email,
       password: password,
     }).then((data) => {
-      console.log(data);
       if (data.error) {
         setValues({
           ...values,
           email: "",
           password: "",
           error: data.error,
+          loading: false,
         });
       } else {
-        emptyAllFields();
+        authenticate(data, () => {
+          setValues({ ...values, shouldRedirect: true });
+        });
       }
     });
   };
@@ -64,7 +59,7 @@ const Signin = () => {
             <div className="card-body p-5">
               <h2 className="text-uppercase text-center mb-5">Login</h2>
 
-              <form>
+              <form onSubmit={onFormSubmit}>
                 <div className="mb-4">
                   <label
                     htmlFor="inputEmail"
@@ -86,7 +81,12 @@ const Signin = () => {
                   />
                   {error.length > 0 && (
                     <span className="invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {error}
                     </span>
@@ -138,7 +138,12 @@ const Signin = () => {
                   </div>
                   {error.length > 0 && (
                     <span className="invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {error}
                     </span>
@@ -147,8 +152,7 @@ const Signin = () => {
 
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
-                    onClick={onClickSubmit}
-                    type="button"
+                    type="submit"
                     className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
                     Login
@@ -174,6 +178,30 @@ const Signin = () => {
     </section>
   );
 
-  return <AuthLayout>{signInForm()}</AuthLayout>;
+  const showLoading = () => {
+    loading && (
+      <div className="alert alert-info">
+        <h2>LOADING...</h2>
+      </div>
+    );
+  };
+
+  const redirectUser = () => {
+    if (shouldRedirect) {
+      if (user && user.role === 1) {
+        return <Redirect to="/admin/account" />;
+      } else {
+        return <Redirect to="/" />;
+      }
+    }
+  };
+
+  return (
+    <AuthLayout>
+      {signInForm()}
+      {showLoading()}
+      {redirectUser()}
+    </AuthLayout>
+  );
 };
 export default Signin;

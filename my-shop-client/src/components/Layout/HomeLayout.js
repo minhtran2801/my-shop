@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 
-const HomeLayout = ({ children }) => {
+const HomeLayout = ({ className, children }) => {
   return (
     <div>
       <Navbar />
-      <div>
+      <div className={className}>
         <div>{children}</div>
       </div>
     </div>

@@ -62,7 +62,6 @@ exports.createProduct = (req, res) => {
 
     // Split ingredients to store in an array
     if (fields.ingredients) {
-      console.log(fields.ingredients);
       product.ingredients = fields.ingredients.split(",");
     }
 
@@ -129,7 +128,6 @@ exports.updateProduct = (req, res) => {
 
     // Split ingredients to store in an array
     if (fields.ingredients) {
-      console.log(fields.ingredients);
       fields.ingredients = fields.ingredients.split(",");
     }
 
@@ -230,8 +228,6 @@ exports.searchProducts = (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let filtersArgs = {};
 
-  //console.log(order, sortBy, limit, skip, req.body.filters);
-
   // Check for applied filters
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
@@ -246,7 +242,6 @@ exports.searchProducts = (req, res) => {
     }
   }
 
-  //console.log("filtersArgs", skip);
   Product.find(filtersArgs)
     .select("-photo")
     .populate("category")

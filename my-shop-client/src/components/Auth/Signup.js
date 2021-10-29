@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthLayout from "../Layout/AuthLayout";
-import { signUpUser } from "../../auth";
+import { signUpUser } from "../../api/userAuth";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -42,7 +42,7 @@ const Signup = () => {
     event.preventDefault();
   };
 
-  const emptyAllFields = () => {
+  const successRegister = () => {
     setValues({
       ...values,
       f_name: "",
@@ -57,16 +57,14 @@ const Signup = () => {
     });
   };
 
-  const clickSubmit = (event) => {
+  const onFormSubmit = (event) => {
     event.preventDefault();
-    console.log("F", values);
     signUpUser({
       f_name: f_name,
       l_name: l_name,
       email: email,
       password: password,
     }).then((data) => {
-      console.log(data);
       if (data.errors) {
         setValues({
           ...values,
@@ -79,7 +77,7 @@ const Signup = () => {
           success: false,
         });
       } else {
-        emptyAllFields();
+        successRegister();
       }
     });
   };
@@ -94,7 +92,7 @@ const Signup = () => {
                 Create an account
               </h2>
 
-              <form>
+              <form onSubmit={onFormSubmit}>
                 {/* FIRST NAME */}
                 <div className="form-outline mb-4">
                   <label
@@ -117,7 +115,12 @@ const Signup = () => {
                   />
                   {f_name_error.length > 0 && (
                     <span className="form-text invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {f_name_error}
                     </span>
@@ -145,7 +148,12 @@ const Signup = () => {
                   />
                   {f_name_error.length > 0 && (
                     <span className="form-text invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {f_name_error}
                     </span>
@@ -177,7 +185,12 @@ const Signup = () => {
                   </div>
                   {email_error.length > 0 && (
                     <span className="form-text invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {email_error}
                     </span>
@@ -237,12 +250,12 @@ const Signup = () => {
                     }`}
                   >
                     <div className="row">
-                      <div className="col">
+                      <div className="col-md">
                         {" "}
                         • Minimum 6 character
                         <br />• 1 number
                       </div>
-                      <div className="col">
+                      <div className="col-md">
                         • 1 lowercase character
                         <br />• 1 uppercase character
                       </div>
@@ -250,7 +263,12 @@ const Signup = () => {
                   </div>
                   {password_error.length > 0 && (
                     <span className="form-text invalidText">
-                      <i class="fas fa-exclamation-circle"> </i>
+                      <i
+                        className="fas fa-exclamation-circle"
+                        aria-hidden="true"
+                      >
+                        {" "}
+                      </i>
                       {"   "}
                       {password_error}
                     </span>
@@ -259,15 +277,22 @@ const Signup = () => {
 
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
-                    onClick={clickSubmit}
-                    type="button"
+                    type="submit"
                     className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
                     Register
                   </button>
+                  <div className="form-text">
+                    <p className="text-center text-muted">
+                      By clicking Register, you agree to our{" "}
+                      <a href="/signin" className="text-primary anchor-link">
+                        Privacy Policy
+                      </a>
+                    </p>
+                  </div>
                 </div>
 
-                <p className="text-center text-muted mt-5 mb-0">
+                <p className="text-center text-muted mt-3 mb-0">
                   Have already an account?{" "}
                   <a href="/signin" className="text-primary anchor-link">
                     Login
