@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import AuthLayout from "../Layout/AuthLayout";
-import { signInUser, authenticate, isAuthenticated } from "../../api/userAuth";
+import {
+  signInUser,
+  authenticate,
+  isAuthenticated,
+} from "../../api/customerAPIs";
 import { Redirect } from "react-router";
 
 const Signin = () => {
@@ -101,7 +105,7 @@ const Signin = () => {
                   >
                     Password
                   </label>
-                  <div className="input-group ">
+                  <div className="input-group">
                     <input
                       type={showPassword ? "text" : "password"}
                       className={`form-control form-control-lg ${
@@ -153,7 +157,7 @@ const Signin = () => {
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
                     type="submit"
-                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
+                    className="authbtn btn btn-dark btn-block btn-lg text-white w-100"
                   >
                     Login
                   </button>

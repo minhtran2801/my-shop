@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { signOutUser, isAuthenticated } from "../../api/userAuth";
+import { signOutUser, isAuthenticated } from "../../api/customerAPIs";
 
 import logo from "../../assets/logo/logo.png";
 
@@ -22,7 +22,7 @@ const Navbar = ({ history }) => {
 
   return (
     <div className="sticky-top bg-dark">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
         <div className="container nav-container">
           <a className="navbar-brand" href="/">
             <img
@@ -50,7 +50,7 @@ const Navbar = ({ history }) => {
           </div>
 
           <button
-            className="navbar-toggler me-lg-auto"
+            className="navbar-toggler me-xl-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseNavBar"
@@ -60,9 +60,8 @@ const Navbar = ({ history }) => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* NAVBAR */}
           <div className="collapse navbar-collapse" id="collapseNavBar">
-            <ul className="navbar-nav flex-row flex-wrap ms-md-auto text-center justify-content-center align-items-center">
+            <ul className="navbar-nav flex-row flex-wrap ms-lg-auto text-center justify-content-center align-items-center">
               <li className="nav-item col-5 col-md-auto active">
                 <Link
                   className="nav-link p-2"

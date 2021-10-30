@@ -36,12 +36,14 @@ body {
   overflow: auto;
 }
 
-.btn:focus {
-  outline: none;
-  box-shadow: none;
+.btn:focus,
+.btn:active,
+.form-control:focus,
+.form-select:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
-
-.gradient-custom-4 {
+.authbtn:hover {
   /* fallback for old browsers */
   background: #84fab0;
 

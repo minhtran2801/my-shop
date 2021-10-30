@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { signOutUser } from "../../api/userAuth";
+import { signOutUser } from "../../../api/customerAPIs";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
     return {
-      fontWeight: "bold",
+      backgroundColor: "#cee6e4",
     };
   } else {
     return {
-      fontWeight: "normal",
+      backgroundColor: "white",
     };
   }
 };
@@ -34,7 +34,7 @@ const SideBar = ({ history }) => {
         </span>
       </div>
       <ul
-        className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-sm-star"
+        className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-sm-star w-100"
         id="customerSidebar"
       >
         <li className="nav-item fs-5">
@@ -57,7 +57,7 @@ const SideBar = ({ history }) => {
             <span className="ms-1 d-none d-md-inline">Address Book</span>
           </Link>
         </li>
-        <li className="nav-item fs-5 pt-4">
+        <li className="nav-item fs-5 pt-4 ">
           <Link
             className="nav-link text-dark"
             style={isActive(history, "/customer/profile/update")}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthLayout from "../Layout/AuthLayout";
-import { signUpUser } from "../../api/userAuth";
+import { signUpUser } from "../../api/customerAPIs";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -278,7 +278,7 @@ const Signup = () => {
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
                     type="submit"
-                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
+                    className="authbtn btn btn-dark btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
                     Register
                   </button>
