@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import HomeLayout from "../../Layout/HomeLayout";
-import { isAuthenticated } from "../../../api/userAuth";
-import { createCategory } from "../../../api/category";
+import AdminDashboardLayout from "../../Layout/AdminDashboardLayout";
+import { isAuthenticated } from "../../../api/customerAPIs";
+import { createCategory } from "../../../api/adminAPIs";
 
 const CreateCategory = () => {
   const [name, setName] = useState("");
@@ -49,31 +49,30 @@ const CreateCategory = () => {
   };
 
   const newCategoryForm = (
-    <form onSubmit={onFormSubmit}>
-      <div className="form-group">
-        <label className="text-muted">Category</label>
-        <input
-          type="text"
-          className="form-control"
-          onChange={handleChange}
-          value={name}
-          autoFocus
-        />
-      </div>
-      <button className="btn btn-outline-primary">Create Category</button>
-    </form>
+    <div className="container">
+      <form onSubmit={onFormSubmit}>
+        <div className="form-group">
+          <label className="text-muted">Category</label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+            value={name}
+            autoFocus
+          />
+        </div>
+        <button className="btn btn-outline-primary">Create Category</button>
+      </form>
+    </div>
   );
 
   return (
-    <HomeLayout className="container-fluid bg-white mt-5 mb-5">
-      <div className="row">
-        <div className="col-md-8 offset-md-2">
-          {showSuccess()}
-          {showError()}
-          {newCategoryForm}
-        </div>
-      </div>
-    </HomeLayout>
+    <AdminDashboardLayout>
+      <h1>Create A New Category</h1>
+      {showSuccess()}
+      {showError()}
+      {newCategoryForm}
+    </AdminDashboardLayout>
   );
 };
 

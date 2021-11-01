@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Navbar/Footer";
 import Navbar from "../Navbar/Navbar";
 
 const HomeLayout = ({ className, children }) => {
@@ -8,6 +9,7 @@ const HomeLayout = ({ className, children }) => {
       <div className={className}>
         <div>{children}</div>
       </div>
+      <Footer />
     </div>
   );
 };

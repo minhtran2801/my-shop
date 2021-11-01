@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { isAuthenticated } from "../../../api/userAuth";
+import { isAuthenticated } from "../../../api/customerAPIs";
 import CustomerDashboardLayout from "../../Layout/CustomerDashboardLayout";
 
 const CustomerDashboard = () => {
@@ -10,17 +10,13 @@ const CustomerDashboard = () => {
 
   const customerInfo = () => {
     return (
-      <div className="d-block w-100">
-        <div className="block-title">
-          <p className="d-block align-items-center text-dark text-decoration-none">
-            <strong className="ms-2">Account Information</strong>
-          </p>
-          <span>
-            <hr />
-          </span>
+      <div className="row pt-4 px-3">
+        <div className="col-12">
+          <h2>Account Information</h2>
+          <hr />
         </div>
         <div className="block-content row pb-0">
-          <div className="box-contact col-lg ms-2">
+          <div className="box-contact col-lg">
             <div className="box-title">
               <h4 className="d-block align-items-center text-dark text-decoration-none ">
                 <span>Contact Information</span>
@@ -49,7 +45,7 @@ const CustomerDashboard = () => {
               </Link>
             </div>
           </div>
-          <div className="box-newsletter col-lg ms-2">
+          <div className="box-newsletter col-lg">
             <div className="box-title">
               <h4 className="d-block align-items-center text-dark text-decoration-none ">
                 <span>Newsletter</span>
@@ -74,17 +70,13 @@ const CustomerDashboard = () => {
 
   const billingAddress = () => {
     return (
-      <div className="d-block w-100">
-        <div className="block-title">
-          <p className="d-block align-items-center text-dark text-decoration-none">
-            <strong className="ms-2">Billing address</strong>
-          </p>
-          <span>
-            <hr />
-          </span>
+      <div className="row pt-4 px-3">
+        <div className="col-12">
+          <h2>Billing Address</h2>
+          <hr />
         </div>
         <div className="block-content row pb-0">
-          <div className="box-billing col-lg ms-2">
+          <div className="box-billing col-lg">
             <div className="box-title">
               <h4 className="d-block align-items-center text-dark text-decoration-none ">
                 <span>Default Billing Address</span>
@@ -109,7 +101,7 @@ const CustomerDashboard = () => {
               </Link>
             </div>
           </div>
-          <div className="box-shipping col-lg ms-2">
+          <div className="box-shipping col-lg">
             <div className="box-title">
               <h4 className="d-block align-items-center text-dark text-decoration-none ">
                 <span>Default Shipping Address</span>
@@ -142,22 +134,17 @@ const CustomerDashboard = () => {
   const myAccount = () => {
     return (
       <Fragment>
-        <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-4 text-dark min-vh-100">
-          <div className="w-100 fs-5 ">
-            <div className="d-block align-items-center pb-3 pb-lg-2 pb-xl-2 text-dark text-decoration-none">
-              <h1>
-                <span className="ms-2">My Account</span>
-              </h1>
-            </div>
-            <span>
-              <hr className="bg-white" />
-            </span>
+        <div className="row">
+          <div className="col-12">
+            <h1 className="pt-4 px-3">
+              <span>My Account</span>
+            </h1>
           </div>
-          {customerInfo()}
+          <div className="col-12">{customerInfo()}</div>
           <span>
             <hr className="bg-white" />
           </span>
-          {billingAddress()}
+          <div className="col-12">{billingAddress()}</div>
         </div>
       </Fragment>
     );

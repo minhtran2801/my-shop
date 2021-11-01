@@ -12,6 +12,7 @@ import AddressBook from "./Components/Dashboard/Customer/AddressBook";
 
 import AdminDashboard from "./Components/Dashboard/Admin/Dashboard";
 import CreateCategory from "./Components/Dashboard/Admin/CreateCategory";
+import CreateProduct from "./Components/Dashboard/Admin/CreateProduct";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -20,9 +21,12 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
+        {/*GENERAL ROUTES*/}
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />
+
+        {/*CUSTOMER ROUTES*/}
         <PrivateRoute
           path="/customer/account"
           exact
@@ -44,8 +48,21 @@ const Routes = () => {
           component={ChangePassword}
         />
         <PrivateRoute path="/customer/address" exact component={AddressBook} />
+
+        {/*ADMIN ROUTES*/}
         <AdminRoute path="/admin/account" exact component={AdminDashboard} />
-        <AdminRoute path="/create/category" exact component={CreateCategory} />
+        <AdminRoute
+          path="/admin/category/create"
+          exact
+          component={CreateCategory}
+        />
+        <AdminRoute
+          path="/admin/product/create"
+          exact
+          component={CreateProduct}
+        />
+
+        {/*ERROR ROUTES*/}
         <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
     </BrowserRouter>

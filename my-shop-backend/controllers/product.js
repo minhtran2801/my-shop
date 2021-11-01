@@ -37,7 +37,6 @@ exports.createProduct = (req, res) => {
     const {
       name,
       description,
-      warning,
       ingredients,
       directions,
       price,
@@ -62,7 +61,7 @@ exports.createProduct = (req, res) => {
 
     // Split ingredients to store in an array
     if (fields.ingredients) {
-      product.ingredients = fields.ingredients.split(",");
+      product.ingredients = fields.ingredients.split("\n");
     }
 
     // Check if there is a photo and its type
@@ -105,7 +104,6 @@ exports.updateProduct = (req, res) => {
     const {
       name,
       description,
-      warning,
       ingredients,
       directions,
       price,

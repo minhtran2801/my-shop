@@ -1,6 +1,6 @@
 import React from "react";
-import HomeLayout from "../../Layout/HomeLayout";
-import { isAuthenticated } from "../../../api/userAuth";
+import AdminDashboardLayout from "../../Layout/AdminDashboardLayout";
+import { isAuthenticated } from "../../../api/customerAPIs";
 import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -46,14 +46,7 @@ const AdminDashboard = () => {
     );
   };
 
-  return (
-    <HomeLayout className="container">
-      <div className="row">
-        <div className="col-3">{adminLinks()}</div>
-        <div className="col-9">{adminInfo()}</div>
-      </div>
-    </HomeLayout>
-  );
+  return <AdminDashboardLayout>{adminInfo()}</AdminDashboardLayout>;
 };
 
 export default AdminDashboard;

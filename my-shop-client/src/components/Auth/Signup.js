@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthLayout from "../Layout/AuthLayout";
-import { signUpUser } from "../../api/userAuth";
+import { signUpUser } from "../../api/customerAPIs";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -116,12 +116,10 @@ const Signup = () => {
                   {f_name_error.length > 0 && (
                     <span className="form-text invalidText">
                       <i
-                        className="fas fa-exclamation-circle"
+                        className="fas fa-exclamation-circle fa-fw"
                         aria-hidden="true"
-                      >
-                        {" "}
-                      </i>
-                      {"   "}
+                      ></i>
+
                       {f_name_error}
                     </span>
                   )}
@@ -149,12 +147,10 @@ const Signup = () => {
                   {f_name_error.length > 0 && (
                     <span className="form-text invalidText">
                       <i
-                        className="fas fa-exclamation-circle"
+                        className="fas fa-exclamation-circle fa-fw"
                         aria-hidden="true"
-                      >
-                        {" "}
-                      </i>
-                      {"   "}
+                      ></i>
+
                       {f_name_error}
                     </span>
                   )}
@@ -186,12 +182,10 @@ const Signup = () => {
                   {email_error.length > 0 && (
                     <span className="form-text invalidText">
                       <i
-                        className="fas fa-exclamation-circle"
+                        className="fas fa-exclamation-circle fa-fw"
                         aria-hidden="true"
-                      >
-                        {" "}
-                      </i>
-                      {"   "}
+                      ></i>
+
                       {email_error}
                     </span>
                   )}
@@ -230,13 +224,13 @@ const Signup = () => {
                       onClick={handleShowPassword}
                     >
                       <i
-                        className={`fas fa-eye ${
+                        className={`fas fa-eye fa-fw ${
                           showPassword ? "d-none" : "d-inline-block"
                         }`}
                         id="show_eye"
                       ></i>
                       <i
-                        className={`fas fa-eye-slash ${
+                        className={`fas fa-eye-slash fa-fw ${
                           showPassword ? "d-inline-block" : "d-none"
                         }`}
                         id="hide_eye"
@@ -251,7 +245,6 @@ const Signup = () => {
                   >
                     <div className="row">
                       <div className="col-md">
-                        {" "}
                         • Minimum 6 character
                         <br />• 1 number
                       </div>
@@ -264,12 +257,10 @@ const Signup = () => {
                   {password_error.length > 0 && (
                     <span className="form-text invalidText">
                       <i
-                        className="fas fa-exclamation-circle"
+                        className="fas fa-exclamation-circle fa-fw"
                         aria-hidden="true"
-                      >
-                        {" "}
-                      </i>
-                      {"   "}
+                      ></i>
+
                       {password_error}
                     </span>
                   )}
@@ -278,13 +269,13 @@ const Signup = () => {
                 <div className="d-grid gap-2 col-6 mx-auto w-100">
                   <button
                     type="submit"
-                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-white w-100"
+                    className="authbtn btn btn-dark btn-block btn-lg gradient-custom-4 text-white w-100"
                   >
                     Register
                   </button>
                   <div className="form-text">
                     <p className="text-center text-muted">
-                      By clicking Register, you agree to our{" "}
+                      By clicking Register, you agree to our
                       <a href="/signin" className="text-primary anchor-link">
                         Privacy Policy
                       </a>
@@ -293,7 +284,7 @@ const Signup = () => {
                 </div>
 
                 <p className="text-center text-muted mt-3 mb-0">
-                  Have already an account?{" "}
+                  Have already an account?
                   <a href="/signin" className="text-primary anchor-link">
                     Login
                   </a>

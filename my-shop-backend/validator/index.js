@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const { check, validationResult } = require("express-validator");
+const { check, body, validationResult } = require("express-validator");
 
 exports.signupValidation = [
   check("f_name")
@@ -63,6 +63,95 @@ exports.signupValidation = [
       validationRes.array().map((err) => {
         errors[err.param] = err.msg;
       });
+
+      fields_name.forEach((key) => {
+        errors.hasOwnProperty(key)
+          ? (errors[key] = errors[key])
+          : (errors[key] = "");
+      });
+      return res.status(400).send(errors);
+    }
+    next();
+  },
+];
+
+exports.productValidation = [
+  body("name")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Product name is required")
+    .bail(),
+
+  body("description")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Product description is required")
+    .bail(),
+
+  body("price").trim().escape().not().isEmpty().withMessage("Required").bail(),
+
+  body("quantity")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Required")
+    .bail(),
+
+  body("shipping")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Required")
+    .bail(),
+
+  body("ingredients")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Ingredients are required")
+    .bail(),
+
+  body("directions")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Directions are required")
+    .bail(),
+
+  body("category")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Category is required")
+    .bail(),
+
+  (req, res, next) => {
+    const validationRes = validationResult(req);
+    if (!validationRes.isEmpty()) {
+      let errors = { errors: true };
+      const fields_name = [
+        "name",
+        "description",
+        "price",
+        "quantity",
+        "shipping",
+        "ingredients",
+        "directions",
+        "category",
+      ];
+      validationRes.array().map((err) => {
+        errors[err.param] = err.msg;
+      });
+      console.log(errors);
 
       fields_name.forEach((key) => {
         errors.hasOwnProperty(key)

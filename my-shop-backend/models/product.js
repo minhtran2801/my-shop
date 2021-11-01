@@ -14,11 +14,6 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxlength: 2000,
     },
-    warning: {
-      type: String,
-      required: false,
-      maxlength: 2000,
-    },
     ingredients: {
       type: Array,
       default: [],
