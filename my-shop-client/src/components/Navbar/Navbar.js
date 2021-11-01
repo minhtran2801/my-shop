@@ -71,17 +71,6 @@ const Navbar = ({ history }) => {
                   Home<span className="sr-only">(current)</span>
                 </Link>
               </li>
-
-              <li className="nav-item col-5 col-md-auto ">
-                <Link
-                  className="nav-link p-2"
-                  style={isActive(history, "/about")}
-                  to="/"
-                >
-                  About
-                </Link>
-              </li>
-
               <li className="nav-item col-5 col-md-auto ">
                 <Link
                   className="nav-link p-2"

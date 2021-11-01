@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
+const multer = require("multer");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ const productRoutes = require("./routes/product");
 
 // app
 const app = express();
+const forms = multer();
 
 // db
 mongoose
@@ -28,6 +30,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(forms.array());
+app.use(express.urlencoded({ extended: true }));
 
 // routes middlewares
 app.use("/api", authRoutes);

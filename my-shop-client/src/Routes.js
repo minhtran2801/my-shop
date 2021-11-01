@@ -21,9 +21,12 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
+        {/*GENERAL ROUTES*/}
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />
+
+        {/*CUSTOMER ROUTES*/}
         <PrivateRoute
           path="/customer/account"
           exact
@@ -45,6 +48,8 @@ const Routes = () => {
           component={ChangePassword}
         />
         <PrivateRoute path="/customer/address" exact component={AddressBook} />
+
+        {/*ADMIN ROUTES*/}
         <AdminRoute path="/admin/account" exact component={AdminDashboard} />
         <AdminRoute
           path="/admin/category/create"
@@ -56,6 +61,8 @@ const Routes = () => {
           exact
           component={CreateProduct}
         />
+
+        {/*ERROR ROUTES*/}
         <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
     </BrowserRouter>

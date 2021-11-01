@@ -7,7 +7,7 @@ const HeroImage = () => {
         <h1 className="hero-title">Discover the Supplement World</h1>
 
         <h2 className="hero-subtitle">
-          We offer the best supplements and vitamins for you health!
+          We offer the best supplements and vitamins for your health!
         </h2>
 
         <button

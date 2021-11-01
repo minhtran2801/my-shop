@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminDashboardLayout from "../../Layout/AdminDashboardLayout";
 import { isAuthenticated } from "../../../api/customerAPIs";
-import { createCategory } from "../../../api/adminApi";
+import { createCategory } from "../../../api/adminAPIs";
 
 const CreateCategory = () => {
   const [name, setName] = useState("");

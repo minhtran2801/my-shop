@@ -14,12 +14,14 @@ const {
 } = require("../controllers/product");
 const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
+const { productValidation } = require("../validator");
 
 router.post(
   "/product/create/:userId",
   requireSignIn,
   isAuth,
   isAdmin,
+  productValidation,
   createProduct
 );
 

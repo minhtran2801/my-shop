@@ -5,5 +5,7 @@ import "./styles/navbar_styles.css";
 import "./styles/homepage_styles.css";
 import "./styles/auth_styles.css";
 import "./styles/dashboard_styles.css";
+import "./styles/product_styles.css";
+import "./styles/footer_styles.css";
 
 ReactDOM.render(<Routes />, document.getElementById("root"));
