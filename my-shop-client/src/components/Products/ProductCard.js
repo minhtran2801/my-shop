@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ShowImage from "./ShowImage";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ className, product }) => {
   return (
-    <div className="col-md-4 mb-3">
+    <div className={className}>
       <Link to="/" className="text-dark text-decoration-none">
         <div className="bg-light">
           <ShowImage product={product} url="products" />

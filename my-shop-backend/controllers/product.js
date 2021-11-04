@@ -213,7 +213,7 @@ exports.listCategories = (req, res) => {
 
 /**
  * Apply filters to search for products
- * Allow users to filter by categories (using checkbox) and price range using radio buttons
+ * Allow users to filter by categories (using checkbox) and price range using slider
  * User click "apply" to search for products
  * skip for load more button
  * @param {categories, priceRange} req

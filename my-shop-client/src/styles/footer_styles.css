@@ -15,7 +15,7 @@
 }
 .footer .links li a:hover {
   text-decoration: none;
-  color: #4180cb;
+  color: #2bc4da;
 }
 
 .footer .location i {
@@ -27,5 +27,10 @@
 
 .map {
   width: 100%;
+  height: 100%;
+}
+
+.map-container {
+  width: 90%;
   height: 100%;
 }

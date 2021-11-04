@@ -14,18 +14,11 @@ const ShopMap = () => {
     });
     const nav = new mapboxgl.NavigationControl();
     map.addControl(nav, "top-right");
-    const marker = new mapboxgl.Marker({ color: "red" })
-      .setLngLat([151.692767, -32.900506])
-      .addTo(map);
+    const marker = new mapboxgl.Marker({ color: "red" });
+    marker.setLngLat([151.692767, -32.900506]).addTo(map);
   }, []);
 
-  return (
-    <div
-      id="mapContainer"
-      className="ratio"
-      style={{ "--bs-aspect-ratio": "50%" }}
-    ></div>
-  );
+  return <div id="mapContainer" className="map-container"></div>;
 };
 
 export default ShopMap;

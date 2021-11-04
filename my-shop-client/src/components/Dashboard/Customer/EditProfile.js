@@ -4,7 +4,7 @@ import CustomerDashboardLayout from "../../Layout/CustomerDashboardLayout";
 
 const EditProfile = () => {
   const {
-    user: { _id, f_name, l_name, email, role },
+    user: { f_name, l_name, email, role },
   } = isAuthenticated();
 
   const customerInfo = () => {

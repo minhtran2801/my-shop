@@ -5,7 +5,7 @@ import CustomerDashboardLayout from "../../Layout/CustomerDashboardLayout";
 
 const CustomerDashboard = () => {
   const {
-    user: { _id, f_name, l_name, email },
+    user: { f_name, l_name, email },
   } = isAuthenticated();
 
   const customerInfo = () => {
