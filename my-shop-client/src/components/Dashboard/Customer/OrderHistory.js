@@ -1,5 +1,4 @@
 import React from "react";
-import { isAuthenticated } from "../../../api/customerAPIs";
 import CustomerDashboardLayout from "../../Layout/CustomerDashboardLayout";
 
 const DashboardOrder = () => {

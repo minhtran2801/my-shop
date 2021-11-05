@@ -213,18 +213,23 @@ exports.listCategories = (req, res) => {
 
 /**
  * Apply filters to search for products
- * Allow users to filter by categories (using checkbox) and price range using radio buttons
+ * Allow users to filter by categories (using checkbox) and price range using slider
  * User click "apply" to search for products
  * skip for load more button
  * @param {categories, priceRange} req
  * @param { products} res
  */
 exports.searchProducts = (req, res) => {
-  let order = req.body.order ? req.body.order : "asc";
-  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let order = "desc";
+  let sortBy = "soldItems";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let filtersArgs = {};
+
+  if (req.body.sort) {
+    order = req.body.sort.order;
+    sortBy = req.body.sort.sortBy;
+  }
 
   // Check for applied filters
   for (let key in req.body.filters) {

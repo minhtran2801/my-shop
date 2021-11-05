@@ -15,11 +15,7 @@ const CreateProduct = () => {
     categories: [],
     category: "",
     quantity: "",
-    photo: "",
     shipping: "",
-    loading: false,
-    createdProduct: "",
-    redirectToProfile: false,
     formData: "",
     success: false,
   });
@@ -47,10 +43,6 @@ const CreateProduct = () => {
     category,
     quantity,
     shipping,
-    photo,
-    loading,
-    createdProduct,
-    redirectToProfile,
     formData,
     success,
   } = values;
@@ -68,18 +60,20 @@ const CreateProduct = () => {
 
   // Load categories and set formdata
   useEffect(() => {
-    getCategories().then((data) => {
-      if (data.error) {
-        setErrors({ ...errors, errors: data.error });
-      } else {
-        setValues({
-          ...values,
-          categories: data.data,
-          formData: new FormData(),
-        });
-      }
-    });
-  }, []);
+    if (categories.length === 0) {
+      getCategories().then((data) => {
+        if (data.error) {
+          setErrors({ ...errors, errors: data.error });
+        } else {
+          setValues({
+            ...values,
+            categories: data.data,
+            formData: new FormData(),
+          });
+        }
+      });
+    }
+  });
 
   const handleChange = (field) => (event) => {
     const value =
@@ -103,7 +97,6 @@ const CreateProduct = () => {
       price: "",
       category: "",
       quantity: "",
-      photo: "",
       shipping: "",
       loading: true,
       error: "",
@@ -318,7 +311,7 @@ const CreateProduct = () => {
                     }`}
                     aria-label="shipping"
                   >
-                    <option>Please select</option>
+                    <option value="">Please select</option>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                   </select>
@@ -457,7 +450,7 @@ const CreateProduct = () => {
                 }`}
                 id="category"
               >
-                <option>Please select</option>
+                <option value="">Please select</option>
                 {categories &&
                   categories.map((cat, index) => (
                     <option key={index} value={cat._id}>

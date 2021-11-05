@@ -5,12 +5,11 @@ import ProductCard from "../Products/ProductCard";
 const FeaturedProducts = () => {
   const [productBySell, setProductBySell] = useState([]);
   const [productByArrival, setProductByArrival] = useState([]);
-  const [errors, setErrors] = useState(false);
 
   const loadProductBySell = () => {
     getProducts("soldItems").then((data) => {
       if (data.error) {
-        setErrors(data.error);
+        console.log(data.error);
       } else {
         setProductBySell(data);
       }
@@ -20,7 +19,7 @@ const FeaturedProducts = () => {
   const loadProductByArrival = () => {
     getProducts("createdAt").then((data) => {
       if (data.error) {
-        setErrors(data.error);
+        console.log(data.error);
       } else {
         setProductByArrival(data);
       }
@@ -39,7 +38,7 @@ const FeaturedProducts = () => {
           <h2>BEST SELLERS</h2>
         </div>
         {productBySell.map((prod, index) => (
-          <ProductCard key={index} product={prod} />
+          <ProductCard key={index} className="col-md-4 pb-3" product={prod} />
         ))}
       </div>
       <div className="col-md-6 offset-md-3 py-4">
@@ -50,7 +49,7 @@ const FeaturedProducts = () => {
           <h2>NEW ARRIVALS</h2>
         </div>
         {productByArrival.map((prod, index) => (
-          <ProductCard key={index} product={prod} />
+          <ProductCard key={index} className="col-md-4 pb-3" product={prod} />
         ))}
       </div>
     </div>

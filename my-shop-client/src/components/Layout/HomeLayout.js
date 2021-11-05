@@ -1,14 +1,14 @@
 import React from "react";
 import Footer from "../Navbar/Footer";
 import Navbar from "../Navbar/Navbar";
+import Newsletter from "../Homepage/Newsletter";
 
-const HomeLayout = ({ className, children }) => {
+const HomeLayout = ({ children }) => {
   return (
-    <div>
+    <div id="homeLayout">
       <Navbar />
-      <div className={className}>
-        <div>{children}</div>
-      </div>
+      {children}
+      {Newsletter()}
       <Footer />
     </div>
   );

@@ -14,12 +14,12 @@ const About = () => (
         <img src={AboutBanner} alt="about" className="product-img" />
       </div>
       <div className="col-md-6 offset-md-3 text-center">
-        Blackmores is Australia’s leading natural health company. Based on the
-        vision of our founder Maurice Blackmore (1906-1977), we are passionate
-        about natural health and inspiring people to take control of and invest
-        in their wellbeing. We develop high quality products and services that
-        deliver a more natural approach to health, based on our expertise in
-        vitamins, minerals, herbs and nutrients.
+        Lam Ngoc Pharmacy is Vietnam’s leading natural health and supplement
+        retailer. Based on the vision of our founder Ngoc Pham, we are
+        passionate about natural health and inspiring people to take control of
+        and invest in their wellbeing. We develop high quality products and
+        services that deliver a more natural approach to health, based on our
+        expertise in vitamins, minerals, herbs and nutrients.
       </div>
     </div>
   </div>
