@@ -5,7 +5,7 @@ import Newsletter from "../Homepage/Newsletter";
 
 const HomeLayout = ({ children }) => {
   return (
-    <div>
+    <div id="homeLayout">
       <Navbar />
       {children}
       {Newsletter()}

@@ -78,6 +78,10 @@
   border-style: groove;
 }
 
+.newsletter-input:focus-visible {
+  outline: none;
+}
+
 .newsletter-btn {
   width: 100%;
   height: 50px;

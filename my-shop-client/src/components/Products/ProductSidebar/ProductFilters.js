@@ -16,7 +16,7 @@ const ProductFilters = ({ categories, handleFilters }) => {
   };
 
   return (
-    <div className="accordion border-0 pb-5" id="accordionFilter">
+    <div className="accordion border-0 pb-2" id="accordionFilter">
       <div className="accordion-item">
         <h2 className="accordion-header" id="headingOne">
           <button

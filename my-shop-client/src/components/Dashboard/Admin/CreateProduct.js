@@ -311,7 +311,7 @@ const CreateProduct = () => {
                     }`}
                     aria-label="shipping"
                   >
-                    <option>Please select</option>
+                    <option value="">Please select</option>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                   </select>
@@ -450,7 +450,7 @@ const CreateProduct = () => {
                 }`}
                 id="category"
               >
-                <option>Please select</option>
+                <option value="">Please select</option>
                 {categories &&
                   categories.map((cat, index) => (
                     <option key={index} value={cat._id}>

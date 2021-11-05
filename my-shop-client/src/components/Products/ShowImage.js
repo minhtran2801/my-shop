@@ -28,7 +28,10 @@ const ShowImage = ({ product, url }) => {
         className="mb-3 product-img"
       />
       <div className="img-overlay" style={btnDisplay}>
-        <button type="button" className="cart-btn btn btn-dark btn-lg w-75">
+        <button
+          type="button"
+          className="cart-btn btn btn-dark btn-lg w-75 text-responsive"
+        >
           <i className="fas fa-cart-plus fa-fw me-2"></i>
           Add to cart
         </button>

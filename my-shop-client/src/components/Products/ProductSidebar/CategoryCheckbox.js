@@ -18,17 +18,35 @@ const CategoryCheckbox = ({ categories, handleFilters }) => {
     handleFilters(newCheckCategoryId);
   };
 
-  return categories.map((category, i) => (
-    <li key={i} className="category-li list-unstyled">
-      <input
-        type="checkbox"
-        className="form-check-input"
-        value={checked.indexOf(category._id) !== -1}
-        onChange={handleCheck(category._id)}
-      />
-      <label className="form-check-label ps-2">{category.name}</label>
-    </li>
-  ));
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    const emptyFilters = [];
+    setChecked(emptyFilters);
+    handleFilters(emptyFilters);
+  };
+
+  return (
+    <>
+      {categories.map((category, i) => (
+        <li key={i} className="category-li list-unstyled">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            value={checked.indexOf(category._id) !== -1}
+            checked={checked.indexOf(category._id) !== -1}
+            onChange={handleCheck(category._id)}
+            id={category.name}
+          />
+          <label className="form-check-label ps-2" htmlFor={category.name}>
+            {category.name}
+          </label>
+        </li>
+      ))}
+      <li className="clear-li list-unstyled" onClick={handleOnClick}>
+        <span className="clear-span">Clear All</span>
+      </li>
+    </>
+  );
 };
 
 export default CategoryCheckbox;

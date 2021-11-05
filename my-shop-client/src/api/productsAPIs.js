@@ -12,12 +12,12 @@ export const getProducts = (sortBy) => {
     });
 };
 
-export const getFilteredProducts = (skip, limit, filters) => {
+export const getFilteredProducts = (filters, sort) => {
   const data = {
-    skip,
-    limit,
     filters,
+    sort,
   };
+
   return fetch(`${API}/products/by/search`, {
     method: "POST",
     headers: {
