@@ -169,9 +169,9 @@ exports.deleteProduct = (req, res) => {
  * new arrival = /products?sortBy=createdat&order=desc&limit=4
  * no params = return all products
  */
-exports.listProduct = (req, res) => {
-  let order = req.query.order ? req.query.order : "asc";
-  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+exports.listProducts = (req, res) => {
+  let order = req.query.order ? req.query.order : "desc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "soldItems";
   let limit = req.query.limit ? parseInt(req.query.limit) : 3;
 
   // Select all product details EXCEPT for photos to increase performance
@@ -180,6 +180,17 @@ exports.listProduct = (req, res) => {
     .populate("category")
     .sort([[sortBy, order]])
     .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({ error: "Products not found" });
+      }
+      res.json(products);
+    });
+};
+
+exports.searchProducts = (req, res) => {
+  Product.find({ name: { $regex: req.query.q, $options: "i" } })
+    .select("-photo")
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({ error: "Products not found" });
@@ -219,7 +230,7 @@ exports.listCategories = (req, res) => {
  * @param {categories, priceRange} req
  * @param { products} res
  */
-exports.searchProducts = (req, res) => {
+exports.filterProducts = (req, res) => {
   let order = "desc";
   let sortBy = "soldItems";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;

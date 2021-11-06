@@ -18,13 +18,25 @@ export const getFilteredProducts = (filters, sort) => {
     sort,
   };
 
-  return fetch(`${API}/products/by/search`, {
+  return fetch(`${API}/products/by/filter`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-type": "application/json",
     },
     body: JSON.stringify(data),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const searchProducts = (query_param) => {
+  return fetch(`${API}/products/search?q=${query_param}`, {
+    method: "GET",
   })
     .then((response) => {
       return response.json();

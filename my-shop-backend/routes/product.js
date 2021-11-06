@@ -5,10 +5,11 @@ const {
   readProduct,
   updateProduct,
   deleteProduct,
-  listProduct,
+  listProducts,
+  searchProducts,
   listRelatedProducts,
   listCategories,
-  searchProducts,
+  filterProducts,
   sendProductPhoto,
   productById,
 } = require("../controllers/product");
@@ -43,10 +44,11 @@ router.put(
   updateProduct
 );
 
-router.get("/products", listProduct);
+router.get("/products", listProducts);
+router.get("/products/search", searchProducts);
 router.get("/products/related/:productId", listRelatedProducts);
 router.get("/products/categories", listCategories);
-router.post("/products/by/search", searchProducts);
+router.post("/products/by/filter", filterProducts);
 router.get("/products/photo/:productId", sendProductPhoto);
 
 router.param("userId", userById);
