@@ -32,8 +32,8 @@ const ProductSortBar = ({ itemsQuantity, handleSort }) => {
 
   return (
     <div className="row d-flex align-items-center pb-3">
-      <div className="product-number col-4">{itemsQuantity} Items</div>
-      <div className="col-8 d-flex justify-content-end align-items-center">
+      <div className="product-number col-3">{itemsQuantity} Items</div>
+      <div className="col-9 d-flex justify-content-end align-items-center">
         <div className="sort-title">Sort By</div>
         <select
           className="form-select sort-select"

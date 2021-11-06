@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Redirect } from "react-router";
 import { signOutUser, isAuthenticated } from "../../api/customerAPIs";
+import { searchProducts } from "../../api/productsAPIs";
 
 import logo from "../../assets/logo/logo.png";
 
@@ -19,6 +21,54 @@ const isActive = (history, path) => {
 
 const Navbar = ({ history }) => {
   const { user } = isAuthenticated();
+  const [searchQuery, setSearchQuery] = useState({
+    query: "",
+    results: [],
+    finishSearch: false,
+  });
+
+  const { query, results, finishSearch } = searchQuery;
+
+  const performSearch = () => {
+    if (query) {
+      searchProducts(query).then((res) => {
+        if (res.error) {
+          console.log(res.error);
+        } else {
+          setSearchQuery({ ...searchQuery, results: res, finishSearch: true });
+        }
+      });
+    }
+  };
+
+  const onSearchSubmit = (event) => {
+    event.preventDefault();
+    performSearch();
+  };
+
+  const handleSearch = (event) => {
+    setSearchQuery({
+      ...searchQuery,
+      query: event.target.value,
+      finishSearch: false,
+    });
+  };
+
+  const redirectProducts = () => {
+    if (finishSearch) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/searchResults",
+            state: {
+              productList: results,
+              searchQuery: query,
+            },
+          }}
+        />
+      );
+    }
+  };
 
   return (
     <div className="sticky-top bg-dark">
@@ -33,17 +83,20 @@ const Navbar = ({ history }) => {
           </a>
 
           <div className="nav-searchBar">
-            <form className="form-inline">
+            <form className="form-inline" onSubmit={onSearchSubmit}>
               <div className="input-group mr-sm-2">
                 <input
                   className="form-control mr-sm-2"
-                  type="search"
+                  type="text"
                   placeholder="Search..."
                   aria-label="Search"
-                  // onclick
+                  value={query}
+                  onChange={handleSearch}
                 />
                 <span className="input-group-text border-0" id="search-icon">
-                  <i className="fa fa-search icon"></i>
+                  <button type="submit" className="btn btn-light border-0 p-0">
+                    <i className="fa fa-search icon"></i>
+                  </button>
                 </span>
               </div>
             </form>
@@ -157,6 +210,7 @@ const Navbar = ({ history }) => {
             </ul>
           </div>
         </div>
+        {redirectProducts()}
       </nav>
     </div>
   );
