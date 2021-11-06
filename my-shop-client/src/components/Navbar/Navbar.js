@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Redirect } from "react-router";
 import { signOutUser, isAuthenticated } from "../../api/customerAPIs";
-import { searchProducts } from "../../api/productsAPIs";
+import { searchProducts, getProductsNames } from "../../api/productsAPIs";
 
 import logo from "../../assets/logo/logo.png";
 
@@ -21,6 +21,7 @@ const isActive = (history, path) => {
 
 const Navbar = ({ history }) => {
   const { user } = isAuthenticated();
+  const [productNameList, setProductNameList] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
     query: "",
     results: [],
@@ -40,6 +41,19 @@ const Navbar = ({ history }) => {
       });
     }
   };
+
+  // Load product names when first load
+  useEffect(() => {
+    getProductsNames().then((products) => {
+      if (products.error) {
+        console.log(products.error);
+      } else {
+        let nameList = [];
+        products.map((product) => nameList.push(product.name));
+        setProductNameList(nameList);
+      }
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSearchSubmit = (event) => {
     event.preventDefault();
@@ -87,12 +101,20 @@ const Navbar = ({ history }) => {
               <div className="input-group mr-sm-2">
                 <input
                   className="form-control mr-sm-2"
-                  type="text"
+                  type="seach"
+                  list={
+                    query !== "" && query.length > 3 ? "search-datalist" : ""
+                  }
                   placeholder="Search..."
                   aria-label="Search"
                   value={query}
                   onChange={handleSearch}
                 />
+                <datalist id="search-datalist">
+                  {productNameList.map((name, i) => (
+                    <option key={i}>{name}</option>
+                  ))}
+                </datalist>
                 <span className="input-group-text border-0" id="search-icon">
                   <button type="submit" className="btn btn-light border-0 p-0">
                     <i className="fa fa-search icon"></i>

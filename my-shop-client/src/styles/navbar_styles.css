@@ -52,3 +52,18 @@
 #search-icon {
   background-color: white;
 }
+
+datalist {
+  display: none !important;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+.autocomplete-search {
+  display: block;
+  background-color: white;
+  color: white;
+  overflow-y: auto;
+}
