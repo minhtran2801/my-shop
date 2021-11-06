@@ -12,6 +12,18 @@ export const getProducts = (sortBy) => {
     });
 };
 
+export const getProductsNames = () => {
+  return fetch(`${API}/products`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const getFilteredProducts = (filters, sort) => {
   const data = {
     filters,

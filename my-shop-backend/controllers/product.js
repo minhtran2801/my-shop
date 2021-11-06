@@ -172,7 +172,7 @@ exports.deleteProduct = (req, res) => {
 exports.listProducts = (req, res) => {
   let order = req.query.order ? req.query.order : "desc";
   let sortBy = req.query.sortBy ? req.query.sortBy : "soldItems";
-  let limit = req.query.limit ? parseInt(req.query.limit) : 3;
+  let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
   // Select all product details EXCEPT for photos to increase performance
   Product.find()
