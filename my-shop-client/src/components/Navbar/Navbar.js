@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Redirect } from "react-router";
 import { signOutUser, isAuthenticated } from "../../api/customerAPIs";
-import { searchProducts, getProductsNames } from "../../api/productsAPIs";
+import { searchProducts, getAllProducts } from "../../api/productsAPIs";
 
 import logo from "../../assets/logo/logo.png";
 
@@ -44,7 +44,7 @@ const Navbar = ({ history }) => {
 
   // Load product names when first load
   useEffect(() => {
-    getProductsNames().then((products) => {
+    getAllProducts().then((products) => {
       if (products.error) {
         console.log(products.error);
       } else {

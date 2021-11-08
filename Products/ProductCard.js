@@ -5,10 +5,7 @@ import ShowImage from "./ShowImage";
 const ProductCard = ({ className, product }) => {
   return (
     <div className={className}>
-      <Link
-        to={`product/${product._id}`}
-        className="text-dark text-decoration-none"
-      >
+      <Link to="/" className="text-dark text-decoration-none">
         <div className="bg-light">
           <ShowImage product={product} url="products" />
         </div>

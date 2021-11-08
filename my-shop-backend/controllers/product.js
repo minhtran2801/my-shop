@@ -1,9 +1,7 @@
 const Product = require("../models/product");
-const formidable = require("formidable");
 const fs = require("fs");
 const _ = require("lodash");
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const product = require("../models/product");
 
 // MIDDLEWARES
 exports.productById = (req, res, next, id) => {
@@ -26,63 +24,54 @@ exports.sendProductPhoto = (req, res, next) => {
 
 // CRUD Operations
 exports.createProduct = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
+  const fields = req.body;
+  const photoFile = req.file;
+  // Check requirements for all fields
+  const {
+    name,
+    description,
+    ingredients,
+    directions,
+    price,
+    category,
+    quantity,
+    shipping,
+  } = fields;
+  if (
+    !name ||
+    !description ||
+    !ingredients ||
+    !directions ||
+    !price ||
+    !category ||
+    !quantity ||
+    !shipping
+  ) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+  let product = new Product(fields);
+  // Split ingredients to store in an array
+  if (fields.ingredients) {
+    product.ingredients = fields.ingredients.split("\n");
+  }
+  // Check if there is a photo and its type
+  if (photoFile) {
+    if (photoFile.size > 1000000) {
+      return res
+        .status(400)
+        .json({ error: "Image should be less than 1mb in size" });
+    }
+    product.photo.data = fs.readFileSync(photoFile.path);
+    product.photo.contentType = photoFile.mimetype;
+  }
+  // Save product to db
+  product.save((err, result) => {
     if (err) {
-      return res.status(400).json({ error: "Image cannot be uploaded" });
+      return res.status(400).json({ error: errorHandler(err) });
     }
-
-    // Check requirements for all fields
-    const {
-      name,
-      description,
-      ingredients,
-      directions,
-      price,
-      category,
-      quantity,
-      shipping,
-    } = fields;
-    if (
-      !name ||
-      !description ||
-      !ingredients ||
-      !directions ||
-      !price ||
-      !category ||
-      !quantity ||
-      !shipping
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
-    let product = new Product(fields);
-
-    // Split ingredients to store in an array
-    if (fields.ingredients) {
-      product.ingredients = fields.ingredients.split("\n");
-    }
-
-    // Check if there is a photo and its type
-    if (files.photo) {
-      if (files.photo.size > 1000000) {
-        return res
-          .status(400)
-          .json({ error: "Image should be less than 1mb in size" });
-      }
-      product.photo.data = fs.readFileSync(files.photo.path);
-      product.photo.contentType = files.photo.type;
-    }
-
-    // Save product to db
-    product.save((err, result) => {
-      if (err) {
-        return res.status(400).json({ error: errorHandler(err) });
-      }
-      res.json(result);
-    });
+    res.json(result);
   });
+  // });
 };
 
 // NOt sending photo with product to send product to front end faster
@@ -93,63 +82,57 @@ exports.readProduct = (req, res) => {
 };
 
 exports.updateProduct = (req, res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
+  const fields = req.body;
+  const photoFile = req.file;
+  // Check requirements for all fields
+  const {
+    name,
+    description,
+    ingredients,
+    directions,
+    price,
+    category,
+    quantity,
+    shipping,
+  } = fields;
+  if (
+    !name ||
+    !description ||
+    !ingredients ||
+    !directions ||
+    !price ||
+    !category ||
+    !quantity ||
+    !shipping
+  ) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  // Split ingredients to store in an array
+  if (fields.ingredients) {
+    fields.ingredients = fields.ingredients.split(",");
+  }
+
+  let product = req.product;
+  product = _.extend(product, fields);
+
+  // Check if there is a photo and its type
+  if (photoFile) {
+    if (photoFile.size > 1000000) {
+      return res
+        .status(400)
+        .json({ error: "Image should be less than 1mb in size" });
+    }
+    product.photo.data = fs.readFileSync(photoFile.path);
+    product.photo.contentType = photoFile.mimetype;
+  }
+
+  // Save product to db
+  product.save((err, result) => {
     if (err) {
-      return res.status(400).json({ error: "Image cannot be uploaded" });
+      return res.status(400).json({ error: errorHandler(err) });
     }
-
-    // Check requirements for all fields
-    const {
-      name,
-      description,
-      ingredients,
-      directions,
-      price,
-      category,
-      quantity,
-      shipping,
-    } = fields;
-    if (
-      !name ||
-      !description ||
-      !ingredients ||
-      !directions ||
-      !price ||
-      !category ||
-      !quantity ||
-      !shipping
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
-    // Split ingredients to store in an array
-    if (fields.ingredients) {
-      fields.ingredients = fields.ingredients.split(",");
-    }
-
-    let product = req.product;
-    product = _.extend(product, fields);
-
-    // Check if there is a photo and its type
-    if (files.photo) {
-      if (files.photo.size > 1000000) {
-        return res
-          .status(400)
-          .json({ error: "Image should be less than 1mb in size" });
-      }
-      product.photo.data = fs.readFileSync(files.photo.path);
-      product.photo.contentType = files.photo.type;
-    }
-
-    // Save product to db
-    product.save((err, result) => {
-      if (err) {
-        return res.status(400).json({ error: errorHandler(err) });
-      }
-      res.json(result);
-    });
+    res.json(result);
   });
 };
 
