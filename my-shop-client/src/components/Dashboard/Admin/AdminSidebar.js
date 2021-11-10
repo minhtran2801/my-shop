@@ -23,7 +23,7 @@ const SideBar = ({ history }) => {
       >
         <li className="nav-item fs-5">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/admin/account")}
             to="/admin/account"
           >
@@ -33,7 +33,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/admin/address")}
             to="/admin/order"
           >
@@ -43,7 +43,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/admin/order/history")}
             to="/admin/order/history"
           >
@@ -53,7 +53,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/admin/category/create")}
             to="/admin/category/create"
           >
@@ -64,7 +64,7 @@ const SideBar = ({ history }) => {
 
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/admin/product/create")}
             to="/admin/product/create"
           >

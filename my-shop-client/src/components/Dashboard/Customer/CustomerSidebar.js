@@ -39,7 +39,7 @@ const SideBar = ({ history }) => {
       >
         <li className="nav-item fs-5">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/customer/account")}
             to="/customer/account"
           >
@@ -49,7 +49,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/customer/address")}
             to="/customer/address"
           >
@@ -59,7 +59,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4 ">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/customer/profile/update")}
             to="/customer/profile/update"
           >
@@ -69,7 +69,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/customer/password/update")}
             to="/customer/password/update"
           >
@@ -79,7 +79,7 @@ const SideBar = ({ history }) => {
         </li>
         <li className="nav-item fs-5 pt-4">
           <Link
-            className="nav-link text-dark"
+            className="sidebar-item nav-link text-dark"
             style={isActive(history, "/customer/order/history")}
             to="/customer/order/history"
           >

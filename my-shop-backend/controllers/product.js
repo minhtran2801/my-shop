@@ -183,8 +183,7 @@ exports.searchProducts = (req, res) => {
 };
 
 exports.listRelatedProducts = (req, res) => {
-  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
-
+  let limit = req.query.limit ? parseInt(req.query.limit) : 4;
   Product.find({ _id: { $ne: req.product }, category: req.product.category })
     .limit(limit)
     .populate("category", "_id name")
@@ -192,6 +191,7 @@ exports.listRelatedProducts = (req, res) => {
       if (err) {
         return res.status(400).json({ error: "Products not found" });
       }
+
       res.json(products);
     });
 };
