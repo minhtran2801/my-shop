@@ -1,3 +1,7 @@
+p {
+  white-space: pre-wrap;
+}
+
 .product-img {
   position: relative;
   max-width: 100%;
@@ -24,7 +28,6 @@
 }
 
 .cart-btn:hover {
-  border: 0;
   /* fallback for old browsers */
   background: #84fab0;
 
@@ -150,4 +153,9 @@
   pointer-events: none;
   color: rgb(198, 197, 202);
   border: 1px solid rgb(198, 197, 202);
+}
+
+.related-products-col {
+  max-width: 380px;
+  max-height: 466px;
 }

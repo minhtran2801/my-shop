@@ -4,6 +4,7 @@ import Signup from "./Components/Auth/Signup";
 import Signin from "./Components/Auth/Signin";
 import Home from "./Components/Homepage/Home";
 import ProductList from "./Components/Products/ProductList";
+import ProductDetail from "./Components/Products/ProductDetail";
 import ProductSearchResults from "./Components/Products/ProductSearchResults";
 
 import CustomerDashboard from "./Components/Dashboard/Customer/Dashboard";
@@ -28,6 +29,7 @@ const Routes = () => {
         <Route path="/signin" exact component={Signin} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/products" exact component={ProductList} />
+        <Route path="/product/:productId" exact component={ProductDetail} />
         <Route path="/searchResults" exact component={ProductSearchResults} />
 
         {/*CUSTOMER ROUTES*/}

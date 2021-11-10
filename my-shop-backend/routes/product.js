@@ -1,5 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+var upload = multer({ storage: storage });
+
+const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
+const { userById } = require("../controllers/user");
+const { productValidation } = require("../validator");
 const {
   createProduct,
   readProduct,
@@ -13,15 +28,14 @@ const {
   sendProductPhoto,
   productById,
 } = require("../controllers/product");
-const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
-const { userById } = require("../controllers/user");
-const { productValidation } = require("../validator");
+const { validationResult } = require("express-validator");
 
 router.post(
   "/product/create/:userId",
   requireSignIn,
   isAuth,
   isAdmin,
+  upload.single("photo"),
   productValidation,
   createProduct
 );
@@ -41,6 +55,7 @@ router.put(
   requireSignIn,
   isAuth,
   isAdmin,
+  upload.single("photo"),
   updateProduct
 );
 

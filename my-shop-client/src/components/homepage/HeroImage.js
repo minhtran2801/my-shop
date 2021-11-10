@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HeroImage = () => {
   return (
@@ -9,14 +10,11 @@ const HeroImage = () => {
         <h2 className="hero-subtitle">
           We offer the best supplements and vitamins for your health!
         </h2>
-
-        <button
-          type="button"
-          className="hero-button btn btn-dark btn-lg"
-          to={"/shop"}
-        >
-          Shop Now
-        </button>
+        <Link to="/products">
+          <button type="button" className="hero-button btn btn-dark btn-lg">
+            Shop Now
+          </button>
+        </Link>
       </div>
     </div>
   );

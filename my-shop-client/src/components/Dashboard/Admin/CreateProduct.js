@@ -176,6 +176,7 @@ const CreateProduct = () => {
                 value={name}
                 onChange={handleChange("name")}
                 id="productName"
+                autoFocus
               />
               {name_error.length > 0 && (
                 <span className="form-text invalidText">
