@@ -1,0 +1,41 @@
+.modal-backdrop {
+  z-index: 0;
+}
+
+.item-name {
+  margin-bottom: 3px;
+}
+
+.quantity-modifier {
+  width: 90px;
+  display: flex;
+  background: #fff;
+  position: relative;
+}
+
+.quantity-input {
+  border-top: 1px solid #212529;
+  border-bottom: 1px solid #212529;
+}
+
+.quantity-input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: inherit;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.remove-item {
+  color: #495057;
+}
+
+.remove-item:hover {
+  color: #212529;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.offcanvas-body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

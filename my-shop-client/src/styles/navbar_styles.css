@@ -5,7 +5,7 @@
   margin-right: 20px;
 }
 
-.nav-icons:hover,
+.nav-cart .group:hover,
 .nav-link:hover {
   color: white !important;
 }
@@ -17,14 +17,16 @@
   max-width: 400px;
 }
 
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
+
 .nav-searchBar {
   width: 40%;
 }
 .nav-icons {
-  width: 100%;
-  margin-bottom: 10px;
   color: #b0aeae;
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .vr {
@@ -66,4 +68,9 @@ datalist {
   background-color: white;
   color: white;
   overflow-y: auto;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: white !important;
 }
