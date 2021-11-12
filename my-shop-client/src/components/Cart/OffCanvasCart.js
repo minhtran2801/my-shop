@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCartItems, removeItem } from "./cartHelpers";
 import ItemCard from "./OffCanvas/ItemCard";
+import { Link } from "react-router-dom";
 
 const OffCanvasCart = ({ isShown }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -63,9 +64,11 @@ const OffCanvasCart = ({ isShown }) => {
               </div>
             </div>
             <div className="mt-3">
-              <button type="button" className="btn btn-dark w-100">
-                CHECKOUT
-              </button>
+              <Link to="/checkout">
+                <button type="button" className="btn btn-dark w-100">
+                  CHECKOUT
+                </button>
+              </Link>
             </div>
           </div>
         ) : (
