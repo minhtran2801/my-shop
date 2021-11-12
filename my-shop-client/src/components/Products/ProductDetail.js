@@ -45,7 +45,7 @@ const ProductDetail = (props) => {
     window.scrollTo({ top: 0, behavior: "instant" });
     const productId = props.match.params.productId;
     loadSingleProduct(productId);
-  }, [props]);
+  }, [props]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const RelatedProducts = () => (
     <div className="container">

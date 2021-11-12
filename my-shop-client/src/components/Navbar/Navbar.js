@@ -5,6 +5,7 @@ import { signOutUser, isAuthenticated } from "../../api/customerAPIs";
 import { searchProducts, getAllProducts } from "../../api/productsAPIs";
 
 import logo from "../../assets/logo/logo.png";
+import OffCanvasCart from "../Cart/OffCanvasCart";
 
 // Check current page
 const isActive = (history, path) => {
@@ -21,6 +22,7 @@ const isActive = (history, path) => {
 
 const Navbar = ({ history }) => {
   const { user } = isAuthenticated();
+  const [isShown, setIsShown] = useState(false);
   const [productNameList, setProductNameList] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
     query: "",
@@ -42,8 +44,8 @@ const Navbar = ({ history }) => {
     }
   };
 
-  // Load product names when first load
   useEffect(() => {
+    // Load product names when first load
     getAllProducts().then((products) => {
       if (products.error) {
         console.log(products.error);
@@ -58,6 +60,10 @@ const Navbar = ({ history }) => {
   const onSearchSubmit = (event) => {
     event.preventDefault();
     performSearch();
+  };
+
+  const handleCart = () => {
+    setIsShown(!isShown);
   };
 
   const handleSearch = (event) => {
@@ -85,7 +91,7 @@ const Navbar = ({ history }) => {
   };
 
   return (
-    <div className="sticky-top bg-dark">
+    <div className="sticky-top ">
       <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
         <div className="container nav-container">
           <a className="navbar-brand" href="/">
@@ -155,25 +161,14 @@ const Navbar = ({ history }) => {
                   Shop
                 </Link>
               </li>
-
-              <li className="nav-item col-5 col-md-auto ">
-                <Link
-                  className="nav-link p-2"
-                  style={isActive(history, "/contact")}
-                  to="/contact"
-                >
-                  Contact Us
-                </Link>
-              </li>
               {!isAuthenticated() && (
                 <li className="nav-item col-5 col-md-auto">
                   <Link className="nav-link p-2" to="/signin">
-                    <div>
-                      <i
-                        className="fas fa-user nav-icons"
-                        style={isActive(history, "/signin")}
-                      ></i>
-                    </div>
+                    <i
+                      className="fas fa-user nav-icons me-2"
+                      style={isActive(history, "/signin")}
+                    ></i>
+                    Login
                   </Link>
                 </li>
               )}
@@ -186,6 +181,7 @@ const Navbar = ({ history }) => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
+                    <i className="fas fa-user nav-icons me-2"></i>
                     Hi {user.f_name}
                   </span>
                   <ul
@@ -201,7 +197,7 @@ const Navbar = ({ history }) => {
                             : "/customer/account"
                         }
                       >
-                        <i className="far fa-user-circle me-2"></i>My Account
+                        <i className="fas fa-user-circle me-2"></i>My Account
                       </Link>
                     </li>
                     <li>
@@ -220,12 +216,17 @@ const Navbar = ({ history }) => {
                 </li>
               )}
               <li className="nav-item col-5 col-md-auto">
-                <Link className="nav-link p-2" to="/cart">
+                <Link
+                  className="nav-link p-2"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasCart"
+                  aria-controls="offcanvasCart"
+                  onClick={handleCart}
+                  to=""
+                >
                   <div>
-                    <i
-                      className="fas fa-shopping-cart nav-icons"
-                      style={isActive(history, "/cart")}
-                    ></i>
+                    <i className="fas fa-shopping-bag nav-icons me-2"></i>
+                    My Cart
                   </div>
                 </Link>
               </li>
@@ -234,6 +235,7 @@ const Navbar = ({ history }) => {
         </div>
         {redirectProducts()}
       </nav>
+      <OffCanvasCart isShown={isShown} />
     </div>
   );
 };

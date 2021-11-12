@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { API } from "../../config";
+import { addItem } from "../Cart/cartHelpers";
 
 const ShowImage = ({ product, url }) => {
+  const [added, setAdded] = useState(false);
   const [btnDisplay, setBtnDisplay] = useState({
     display: "none",
     backgroundColor: "none",
@@ -20,6 +22,17 @@ const ShowImage = ({ product, url }) => {
     e.preventDefault();
     setBtnDisplay({ display: "none" });
   };
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    addItem(product, () => {
+      setAdded(true);
+      setTimeout(() => {
+        setAdded(false);
+      }, 1000);
+    });
+  };
+
   return (
     <div className="img-wrapper" onMouseEnter={showBtn} onMouseLeave={hideBtn}>
       <img
@@ -30,10 +43,23 @@ const ShowImage = ({ product, url }) => {
       <div className="img-overlay" style={btnDisplay}>
         <button
           type="button"
-          className="cart-btn btn btn-dark btn-lg w-75 text-responsive"
+          onClick={addToCart}
+          className={
+            added
+              ? "added-btn btn btn-success px-3 py-2"
+              : "cart-btn btn btn-dark px-3 py-2"
+          }
         >
-          <i className="fas fa-cart-plus fa-fw me-2"></i>
-          Add to cart
+          {added ? (
+            <div>
+              <i className="fas fa-check fa-fw me-2"></i>Added
+            </div>
+          ) : (
+            <div>
+              <i className="fas fa-cart-plus fa-fw me-2"></i>
+              Add To Cart
+            </div>
+          )}
         </button>
       </div>
     </div>
