@@ -76,7 +76,7 @@ const Footer = () => {
   );
 
   return (
-    <div className="mt-5 pt-5 pb-3 bg-dark footer">
+    <div className="pt-5 pb-3 bg-dark footer">
       <div className="container">
         <div className="row">
           <div className="col-lg-5 col-xs-12">

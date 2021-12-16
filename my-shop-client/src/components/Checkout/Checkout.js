@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getBraintreeClientToken } from "../../api/braintreeAPIs";
 import { isAuthenticated } from "../../api/customerAPIs";
-import HomeLayout from "../Layout/HomeLayout";
-import DropIn from "braintree-web-drop-in-react";
 import { getCartItems } from "../Cart/cartHelpers";
+import HomeLayout from "../Layout/HomeLayout";
+import Cart from "./Cart";
+import CheckoutForm from "./CheckoutForm";
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -22,7 +23,7 @@ const Checkout = () => {
       if (data.error) {
         console.log(data.error);
       } else {
-        setData({ ...data, clientToken: data.clientToken, success: true });
+        setData({ clientToken: data.clientToken });
       }
     });
   };
@@ -30,33 +31,29 @@ const Checkout = () => {
   useEffect(() => {
     getToken();
     setCartItems(getCartItems());
-  }, []);
-
-  useEffect(() => {
-    console.log(data);
-    console.log(cartItems);
-  }, [data, cartItems]);
-
-  const ShowDropIn = () => (
-    <div>
-      {data.clientToken !== null && cartItems.length > 0 ? (
-        <div>
-          <DropIn
-            options={{ authorization: data.clientToken }}
-            onInstance={(instance) => (data.instance = instance)}
-          />
-
-          <button className="btn btn-success">CHECKOUT</button>
-        </div>
-      ) : (
-        <div>NO ITEMs</div>
-      )}
-    </div>
-  );
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <HomeLayout>
-      <ShowDropIn />
+      <div className="container my-5">
+        {data.clientToken !== null && cartItems.length > 0 ? (
+          <div className="row d-flex justify-content-between flex-column-reverse flex-lg-row">
+            <div className="col-lg-7 col-auto">
+              <CheckoutForm
+                data={data}
+                cartItems={cartItems}
+                userId={userId}
+                token={token}
+              />
+            </div>
+            <div className="col-lg-5 col-auto">
+              <Cart />
+            </div>
+          </div>
+        ) : (
+          <div>NO ITEMS</div>
+        )}
+      </div>
     </HomeLayout>
   );
 };

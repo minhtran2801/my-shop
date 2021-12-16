@@ -12,7 +12,6 @@ import DashboardOrder from "./Components/Dashboard/Customer/OrderHistory";
 import EditProfile from "./Components/Dashboard/Customer/EditProfile";
 import ChangePassword from "./Components/Dashboard/Customer/ChangePassword";
 import AddressBook from "./Components/Dashboard/Customer/AddressBook";
-import Checkout from "./Components/Checkout/Checkout";
 
 import AdminDashboard from "./Components/Dashboard/Admin/Dashboard";
 import CreateCategory from "./Components/Dashboard/Admin/CreateCategory";
@@ -20,6 +19,8 @@ import CreateProduct from "./Components/Dashboard/Admin/CreateProduct";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
+import Checkout from "./Components/Checkout/Checkout";
+import SuccessCheckout from "./Components/Checkout/SuccessCheckout";
 
 const Routes = () => {
   return (
@@ -56,6 +57,11 @@ const Routes = () => {
         />
         <PrivateRoute path="/customer/address" exact component={AddressBook} />
         <PrivateRoute path="/checkout" exact component={Checkout} />
+        <PrivateRoute
+          path="/checkout/success"
+          exact
+          component={SuccessCheckout}
+        />
 
         {/*ADMIN ROUTES*/}
         <AdminRoute path="/admin/account" exact component={AdminDashboard} />

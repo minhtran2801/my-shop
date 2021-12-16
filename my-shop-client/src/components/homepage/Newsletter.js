@@ -1,7 +1,7 @@
 import React from "react";
 
 const Newsletter = () => (
-  <div className="container">
+  <div className="container mb-5">
     <div className="col-md-6 offset-md-3 py-4">
       <hr />
     </div>
