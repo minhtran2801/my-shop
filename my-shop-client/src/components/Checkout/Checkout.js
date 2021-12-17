@@ -4,7 +4,7 @@ import { isAuthenticated } from "../../api/customerAPIs";
 import { getCartItems } from "../Cart/cartHelpers";
 import HomeLayout from "../Layout/HomeLayout";
 import Cart from "./Cart";
-import CheckoutForm from "./CheckoutForm";
+import AddressForm from "./AddressForm";
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -33,18 +33,32 @@ const Checkout = () => {
     setCartItems(getCartItems());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const showLoading = () => {
+    return (
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <HomeLayout>
-      <div className="container my-5">
-        {data.clientToken !== null && cartItems.length > 0 ? (
+      <div className="container mt-5">
+        {cartItems.length > 0 ? (
           <div className="row d-flex justify-content-between flex-column-reverse flex-lg-row">
             <div className="col-lg-7 col-auto">
-              <CheckoutForm
-                data={data}
-                cartItems={cartItems}
-                userId={userId}
-                token={token}
-              />
+              {data.clientToken !== null ? (
+                <AddressForm
+                  data={data}
+                  cartItems={cartItems}
+                  userId={userId}
+                  token={token}
+                />
+              ) : (
+                showLoading()
+              )}
             </div>
             <div className="col-lg-5 col-auto">
               <Cart />

@@ -16,7 +16,7 @@ const Cart = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="card">
+    <div className="card mb-3">
       <div className="card-body">
         <h3 className="card-title text-center">Order Summary</h3>
         <div className="card-text">

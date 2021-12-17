@@ -87,3 +87,18 @@
   padding-top: 20px;
   font-size: 25px;
 }
+
+.form-check-input:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.form-check-input.is-valid:checked,
+.was-validated .form-check-input:valid:checked {
+  background-color: black;
+}
+
+.form-check-input.is-valid ~ .form-check-label,
+.was-validated .form-check-input:valid ~ .form-check-label {
+  color: unset;
+}

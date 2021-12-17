@@ -15,7 +15,8 @@ const SuccessCheckout = () => {
         </div>
         <div className="pt-5">
           <p className="thankyou-title">
-            Thank you for your order. Your order number is !
+            Thank you for your order. Your order number is
+            {history.location.state.transaction_id}!
           </p>
         </div>
         <div className="pt-3">
