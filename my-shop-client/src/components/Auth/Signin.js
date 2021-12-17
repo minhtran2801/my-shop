@@ -7,7 +7,7 @@ import {
 } from "../../api/customerAPIs";
 import { Redirect } from "react-router";
 
-const Signin = () => {
+const Signin = ({ isCheckout }) => {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -194,8 +194,10 @@ const Signin = () => {
     if (shouldRedirect) {
       if (user && user.role === 1) {
         return <Redirect to="/admin/account" />;
-      } else {
+      } else if (user && !isCheckout) {
         return <Redirect to="/" />;
+      } else {
+        return <Redirect to="/checkout" />;
       }
     }
   };

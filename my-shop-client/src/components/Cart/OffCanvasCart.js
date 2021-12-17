@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getCartItems, removeItem } from "./cartHelpers";
 import ItemCard from "./OffCanvas/ItemCard";
+import { Link, useHistory } from "react-router-dom";
 
 const OffCanvasCart = ({ isShown }) => {
+  let history = useHistory();
+
   const [cartItems, setCartItems] = useState([]);
 
   const getSubTotal = () => {
@@ -22,6 +25,12 @@ const OffCanvasCart = ({ isShown }) => {
 
   const handleQuantity = () => {
     setCartItems(getCartItems());
+  };
+
+  const handleCheckout = () => {
+    if (history.location.pathname === "/checkout") {
+      window.location.reload();
+    }
   };
 
   return (
@@ -63,9 +72,15 @@ const OffCanvasCart = ({ isShown }) => {
               </div>
             </div>
             <div className="mt-3">
-              <button type="button" className="btn btn-dark w-100">
-                CHECKOUT
-              </button>
+              <Link to="/checkout">
+                <button
+                  type="button"
+                  onClick={handleCheckout}
+                  className="btn btn-dark w-100"
+                >
+                  CHECKOUT
+                </button>
+              </Link>
             </div>
           </div>
         ) : (

@@ -19,6 +19,9 @@ import CreateProduct from "./Components/Dashboard/Admin/CreateProduct";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
+import Checkout from "./Components/Checkout/Checkout";
+import SuccessCheckout from "./Components/Checkout/SuccessCheckout";
+import Payment from "./Components/Checkout/Payment";
 
 const Routes = () => {
   return (
@@ -54,6 +57,13 @@ const Routes = () => {
           component={ChangePassword}
         />
         <PrivateRoute path="/customer/address" exact component={AddressBook} />
+        <PrivateRoute path="/checkout" exact component={Checkout} />
+        <PrivateRoute path="/checkout/payment" exact component={Payment} />
+        <PrivateRoute
+          path="/checkout/success"
+          exact
+          component={SuccessCheckout}
+        />
 
         {/*ADMIN ROUTES*/}
         <AdminRoute path="/admin/account" exact component={AdminDashboard} />
