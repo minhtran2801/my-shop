@@ -148,13 +148,13 @@ exports.deleteProduct = (req, res) => {
 
 /**
  * Most popular/ new arrival product
- * most popular = /products?sortBy=soldItems&order=desc&limit=4
+ * most popular = /products?sortBy=soldprods&order=desc&limit=4
  * new arrival = /products?sortBy=createdat&order=desc&limit=4
  * no params = return all products
  */
 exports.listProducts = (req, res) => {
   let order = req.query.order ? req.query.order : "desc";
-  let sortBy = req.query.sortBy ? req.query.sortBy : "soldItems";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "soldprods";
   let limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
   // Select all product details EXCEPT for photos to increase performance
@@ -215,7 +215,7 @@ exports.listCategories = (req, res) => {
  */
 exports.filterProducts = (req, res) => {
   let order = "desc";
-  let sortBy = "soldItems";
+  let sortBy = "soldprods";
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let filtersArgs = {};
@@ -254,4 +254,27 @@ exports.filterProducts = (req, res) => {
         products,
       });
     });
+};
+
+exports.decreaseQuantity = (req, res, next) => {
+  let decrease = req.body.order.products.map((prod) => {
+    return {
+      updateOne: {
+        filter: { _id: prod._id },
+        update: {
+          $inc: {
+            quantity: -prod.purchase_quantity,
+            soldItems: +prod.purchase_quantity,
+          },
+        },
+      },
+    };
+  });
+
+  Product.bulkWrite(decrease, {}, (err, product) => {
+    if (err) {
+      return res.status(400).json({ error: "Could not update quantity" });
+    }
+    next();
+  });
 };
