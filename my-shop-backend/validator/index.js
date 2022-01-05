@@ -163,3 +163,47 @@ exports.productValidation = [
     next();
   },
 ];
+
+exports.passwordValidation = [
+  check("password")
+    .trim()
+    .escape()
+    .not()
+    .isEmpty()
+    .withMessage("Your password cannot be empty")
+    .bail()
+    .isLength({ min: 6 })
+    .withMessage("Your password must have 6 characters mininum")
+    .bail()
+    .matches("[0-9]")
+    .withMessage("A number is required")
+    .bail()
+    .matches("[A-Z]")
+    .withMessage("Password must contain an uppercase letter")
+    .bail(),
+
+  check("confirm_password")
+    .trim()
+    .escape()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error(
+          "Password confirmation does not match password. Please try again!"
+        );
+      }
+
+      // Indicates the success of this synchronous custom validator
+      return true;
+    })
+    .bail(),
+
+  (req, res, next) => {
+    const validationRes = validationResult(req);
+    if (!validationRes.isEmpty()) {
+      let errors = { error: validationRes.errors[0].msg };
+      console.log(validationRes.errors[0].msg);
+      return res.status(400).send(errors);
+    }
+    next();
+  },
+];
