@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeLayout from "../Layout/HomeLayout";
 import { useHistory } from "react-router-dom";
 
 const SuccessCheckout = () => {
   let history = useHistory();
+
+  // Scroll to top on reload
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
   const handleShopping = () => {
     history.push("/products");
   };
+
   return (
     <HomeLayout>
       <div className="container d-flex flex-column justify-content-center align-items-center thankyou-modal">

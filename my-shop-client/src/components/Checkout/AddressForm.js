@@ -180,7 +180,6 @@ const AddressForm = ({ userId, token, data, cartItems }) => {
             value={address_line_2 || ""}
             placeholder="Unit 12/Apt 12/Flat 12"
             onChange={handleChange("address_line_2")}
-            required
           />
         </div>
         <div className="col-md-6">
@@ -279,7 +278,6 @@ const AddressForm = ({ userId, token, data, cartItems }) => {
                 value={billing_address_line_2 || ""}
                 placeholder="Unit 12/Apt 12/Flat 12"
                 onChange={handleChange("billing_address_line_2")}
-                required
               />
             </div>
             <div className="col-md-6">

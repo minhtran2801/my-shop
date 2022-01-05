@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { API } from "../../../config";
 import ItemInfo from "./ItemInfo";
 
-const ItemCard = ({ item, handleRemove, handleQuantity, isCheckingOut }) => {
+const ItemCard = ({ item, handleRemove, handleQuantity, showQuantity }) => {
   const [currentItem, setCurrentItem] = useState(item);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const ItemCard = ({ item, handleRemove, handleQuantity, isCheckingOut }) => {
           </div>
         </div>
         <div className="col-6">
-          {isCheckingOut ? (
+          {showQuantity ? (
             <div>
               <p className="item-name">{item.name}</p>
               <p>Quantity: {item.purchase_quantity}</p>

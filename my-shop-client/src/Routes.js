@@ -16,6 +16,8 @@ import AddressBook from "./Components/Dashboard/Customer/AddressBook";
 import AdminDashboard from "./Components/Dashboard/Admin/Dashboard";
 import CreateCategory from "./Components/Dashboard/Admin/CreateCategory";
 import CreateProduct from "./Components/Dashboard/Admin/CreateProduct";
+import Order from "./Components/Dashboard/Admin/Order";
+import OrderDetail from "./Components/Dashboard/Admin/OrderDetail";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -76,6 +78,17 @@ const Routes = () => {
           path="/admin/product/create"
           exact
           component={CreateProduct}
+        />
+        <AdminRoute path="/admin/order/list" exact component={Order} />
+        <AdminRoute
+          path="/admin/product/create"
+          exact
+          component={CreateProduct}
+        />
+        <AdminRoute
+          path="/admin/order/:orderId"
+          exact
+          component={OrderDetail}
         />
 
         {/*ERROR ROUTES*/}

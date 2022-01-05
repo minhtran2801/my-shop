@@ -60,6 +60,7 @@ const OffCanvasCart = ({ isShown }) => {
                 item={item}
                 handleRemove={handleRemove}
                 handleQuantity={handleQuantity}
+                showQuantity={false}
               />
             ))}
             <hr />

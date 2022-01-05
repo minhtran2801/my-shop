@@ -23,7 +23,7 @@ const Cart = () => {
           <hr />
         </div>
         {cartItems.map((item, index) => (
-          <ItemCard key={index} item={item} isCheckingOut={true} />
+          <ItemCard key={index} item={item} showQuantity={true} />
         ))}
         <hr />
         <div className="d-flex justify-content-end">
