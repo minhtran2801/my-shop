@@ -17,21 +17,36 @@ exports.readUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.profile._id },
-    { $set: req.body },
-    { new: true },
-    (err, user) => {
-      if (err) {
-        return res
-          .status(400)
-          .json({ error: "You are not authorized to update this profile" });
-      }
-      req.profile.hashed_password = undefined;
-      req.profile.salt = undefined;
-      return res.json(user);
+  User.findOne({ _id: req.profile._id }, (err, foundUser) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ error: "You are not authorized to update this profile" });
     }
-  );
+    if (req.body.f_name) {
+      foundUser.f_name = req.body.f_name;
+    }
+    if (req.body.l_name) {
+      foundUser.l_name = req.body.l_name;
+    }
+    if (req.body.email) {
+      foundUser.email = req.body.email;
+    }
+    if (req.body.password) {
+      foundUser.password = req.body.password;
+    }
+    foundUser.save((err, updatedUser) => {
+      if (err) {
+        console.log("USER UPDATE ERROR", err);
+        return res.status(400).json({
+          error: "User update failed",
+        });
+      }
+      updatedUser.hashed_password = undefined;
+      updatedUser.salt = undefined;
+      return res.json(updatedUser);
+    });
+  });
 };
 
 exports.addOrderToHistory = (req, res, next) => {

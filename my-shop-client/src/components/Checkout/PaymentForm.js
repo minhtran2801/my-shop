@@ -11,7 +11,10 @@ const PaymentForm = ({ userId, token, data, cartItems, info }) => {
 
   const getSubTotal = () => {
     return cartItems.reduce((previousTotal, currentItem) => {
-      return previousTotal + currentItem.purchase_quantity * currentItem.price;
+      let sum =
+        parseFloat(previousTotal) +
+        currentItem.purchase_quantity * parseFloat(currentItem.price);
+      return sum.toFixed(2);
     }, 0);
   };
 
