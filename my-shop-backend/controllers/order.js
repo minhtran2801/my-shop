@@ -1,4 +1,4 @@
-const { Order, CartItems } = require("../models/order");
+const { Order } = require("../models/order");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.orderById = (req, res, next, id) => {
@@ -27,7 +27,7 @@ exports.createOrder = (req, res) => {
 exports.listOrders = (req, res) => {
   Order.find()
     .populate("user", "_id f_name l_name email")
-    .sort("-created")
+    .sort({ createdAt: -1 })
     .exec((err, order) => {
       if (err) {
         return res.status(400).json({ error: errorHandler(err) });

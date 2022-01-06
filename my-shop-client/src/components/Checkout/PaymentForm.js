@@ -37,12 +37,12 @@ const PaymentForm = ({ userId, token, data, cartItems, info }) => {
 
         processPayment(userId, token, paymentData)
           .then((res) => {
-            console.log(res);
             // Create order
             const order = {
               products: cartItems,
               transaction_id: res.transaction.id,
               amount: res.transaction.amount,
+
               f_name: info.f_name,
               l_name: info.l_name,
               email: info.email,

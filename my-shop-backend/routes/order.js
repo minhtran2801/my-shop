@@ -23,13 +23,7 @@ router.post(
 
 router.get("/order/list/:userId", requireSignIn, isAuth, isAdmin, listOrders);
 router.get("/order/status/:userId", requireSignIn, isAuth, isAdmin, getStatus);
-router.get(
-  "/order/:userId/:orderId",
-  requireSignIn,
-  isAuth,
-  isAdmin,
-  readOrder
-);
+router.get("/order/:userId/:orderId", requireSignIn, isAuth, readOrder);
 
 router.put(
   "/order/:userId/status/:orderId",

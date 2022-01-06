@@ -9,6 +9,7 @@ import ProductSearchResults from "./Components/Products/ProductSearchResults";
 
 import CustomerDashboard from "./Components/Dashboard/Customer/Dashboard";
 import DashboardOrder from "./Components/Dashboard/Customer/OrderHistory";
+import CustomerOrder from "./Components/Dashboard/Customer/CustomerOrder";
 import EditProfile from "./Components/Dashboard/Customer/EditProfile";
 import ChangePassword from "./Components/Dashboard/Customer/ChangePassword";
 import AddressBook from "./Components/Dashboard/Customer/AddressBook";
@@ -47,6 +48,11 @@ const Routes = () => {
           path="/customer/order/history"
           exact
           component={DashboardOrder}
+        />
+        <PrivateRoute
+          path="/customer/order/history/:orderId"
+          exact
+          component={CustomerOrder}
         />
         <PrivateRoute
           path="/customer/profile/update"
