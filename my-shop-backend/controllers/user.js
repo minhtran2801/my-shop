@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const { Order } = require("../models/order");
+const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.userById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -74,4 +76,15 @@ exports.addOrderToHistory = (req, res, next) => {
       next();
     }
   );
+};
+
+exports.orderHistory = (req, res) => {
+  Order.find({ user: req.profile._id })
+    .sort({ createdAt: -1 })
+    .exec((err, orders) => {
+      if (err) {
+        return res.status(400).json({ error: errorHandler(err) });
+      }
+      res.json(orders);
+    });
 };

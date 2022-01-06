@@ -136,3 +136,20 @@ export const changePassword = (userId, token, user) => {
       console.log(err);
     });
 };
+
+export const getOrderHistory = (userId, token) => {
+  return fetch(`${API}/order/history/${userId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+      Authorization: `bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

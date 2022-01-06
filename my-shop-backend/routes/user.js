@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
-const { userById, readUser, updateUser } = require("../controllers/user");
+const {
+  userById,
+  readUser,
+  updateUser,
+  orderHistory,
+} = require("../controllers/user");
 const { passwordValidation } = require("../validator");
 
 router.get("/secret/:userId", requireSignIn, isAuth, isAdmin, (req, res) => {
@@ -17,6 +22,8 @@ router.put(
   isAuth,
   updateUser
 );
+
+router.get("/order/history/:userId", requireSignIn, isAuth, orderHistory);
 
 router.param("userId", userById);
 

@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import AdminDashboardLayout from "../../Layout/AdminDashboardLayout";
 import { isAuthenticated } from "../../../api/customerAPIs";
-import {
-  getSingleOrder,
-  getOrderStatus,
-  updateOrderStatus,
-} from "../../../api/orderAPIs";
+import { getSingleOrder } from "../../../api/orderAPIs";
 import ItemCard from "../../Cart/OffCanvas/ItemCard";
+import CustomerDashboardLayout from "../../Layout/CustomerDashboardLayout";
 
-const OrderDetail = (props) => {
-  const history = useHistory();
+const CustomerOrder = (props) => {
   const [order, setOrder] = useState([]);
-  const [statusValues, setStatusValues] = useState([]);
   const { user, token } = isAuthenticated();
 
   const loadSingleOrder = (orderId) => {
@@ -20,18 +13,7 @@ const OrderDetail = (props) => {
       if (data.error) {
         console.log(data.error);
       } else {
-        console.log(data);
         setOrder(data);
-      }
-    });
-  };
-
-  const loadStatus = () => {
-    getOrderStatus(user._id, token).then((order) => {
-      if (order.error) {
-        console.log(order.error);
-      } else {
-        setStatusValues(order);
       }
     });
   };
@@ -39,29 +21,10 @@ const OrderDetail = (props) => {
   useEffect(() => {
     const orderId = props.match.params.orderId;
     loadSingleOrder(orderId);
-    loadStatus();
     // eslint-disable-next-line
   }, []);
 
-  const handleStatusChange = (e) => {
-    e.preventDefault();
-    setOrder({ ...order, status: e.target.value });
-  };
-
-  const handleStatusSave = (e) => {
-    e.preventDefault();
-    updateOrderStatus(order._id, user._id, token, order.status).then((data) => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        history.push({
-          pathname: "/admin/order/list",
-        });
-      }
-    });
-  };
-
-  const Status = () => {
+  const Header = () => {
     return (
       <div className="card order-card">
         <div className="card-header d-flex justify-content-between align-items-center">
@@ -69,26 +32,6 @@ const OrderDetail = (props) => {
             <h1>Order Detail</h1>
             <p className="text-muted">Order No: #{order._id}</p>
           </header>
-          <div className="d-flex align-items-center">
-            <label htmlFor="status" className="status-label me-3">
-              Status
-            </label>
-            <select
-              className="form-select me-3"
-              aria-label="status"
-              value={order.status}
-              onChange={handleStatusChange}
-            >
-              {statusValues.map((status, index) => (
-                <option key={index} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-            <button className="btn btn-success" onClick={handleStatusSave}>
-              Save
-            </button>
-          </div>
         </div>
       </div>
     );
@@ -180,10 +123,10 @@ const OrderDetail = (props) => {
   };
 
   return (
-    <AdminDashboardLayout>
+    <CustomerDashboardLayout>
       <div className="container">
         <div className="row">
-          <Status />
+          <Header />
         </div>
         <div className="row py-3">
           <div className="col-lg-8 item-card">
@@ -194,8 +137,8 @@ const OrderDetail = (props) => {
           </div>
         </div>
       </div>
-    </AdminDashboardLayout>
+    </CustomerDashboardLayout>
   );
 };
 
-export default OrderDetail;
+export default CustomerOrder;
