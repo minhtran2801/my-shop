@@ -41,26 +41,36 @@ const ShowImage = ({ product, url }) => {
         className="mb-3 product-img"
       />
       <div className="img-overlay" style={btnDisplay}>
-        <button
-          type="button"
-          onClick={addToCart}
-          className={
-            added
-              ? "added-btn btn btn-success px-3 py-2"
-              : "cart-btn btn btn-dark px-3 py-2"
-          }
-        >
-          {added ? (
-            <div>
-              <i className="fas fa-check fa-fw me-2"></i>Added
-            </div>
-          ) : (
-            <div>
-              <i className="fas fa-cart-plus fa-fw me-2"></i>
-              Add To Cart
-            </div>
-          )}
-        </button>
+        {product.quantity > 0 ? (
+          <button
+            type="button"
+            onClick={addToCart}
+            className={
+              added
+                ? "added-btn btn btn-success px-3 py-2"
+                : "cart-btn btn btn-dark px-3 py-2"
+            }
+          >
+            {added ? (
+              <div>
+                <i className="fas fa-check fa-fw me-2"></i>Added
+              </div>
+            ) : (
+              <div>
+                <i className="fas fa-cart-plus fa-fw me-2"></i>
+                Add To Cart
+              </div>
+            )}
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="cart-btn btn btn-dark btn-lg px-3 py-2"
+            disabled
+          >
+            SOLD OUT
+          </button>
+        )}
       </div>
     </div>
   );

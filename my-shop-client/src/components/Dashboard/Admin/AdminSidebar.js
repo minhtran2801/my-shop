@@ -44,8 +44,8 @@ const SideBar = ({ history }) => {
         <li className="nav-item fs-5 pt-4">
           <Link
             className="sidebar-item nav-link text-dark"
-            style={isActive(history, "/admin/order/history")}
-            to="/admin/order/history"
+            style={isActive(history, "/admin/products")}
+            to="/admin/products"
           >
             <i className="fas fa-warehouse fa-fw" aria-hidden="true"></i>{" "}
             <span className="ms-1 d-none d-md-inline">Products</span>
