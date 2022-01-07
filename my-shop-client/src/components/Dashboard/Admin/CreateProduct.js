@@ -73,7 +73,8 @@ const CreateProduct = () => {
         }
       });
     }
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const handleChange = (field) => (event) => {
     const value =

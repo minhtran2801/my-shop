@@ -84,29 +84,29 @@ exports.readProduct = (req, res) => {
 exports.updateProduct = (req, res) => {
   const fields = req.body;
   const photoFile = req.file;
-  // Check requirements for all fields
-  const {
-    name,
-    description,
-    ingredients,
-    directions,
-    price,
-    category,
-    quantity,
-    shipping,
-  } = fields;
-  if (
-    !name ||
-    !description ||
-    !ingredients ||
-    !directions ||
-    !price ||
-    !category ||
-    !quantity ||
-    !shipping
-  ) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
+  // // Check requirements for all fields
+  // const {
+  //   name,
+  //   description,
+  //   ingredients,
+  //   directions,
+  //   price,
+  //   category,
+  //   quantity,
+  //   shipping,
+  // } = fields;
+  // if (
+  //   !name ||
+  //   !description ||
+  //   !ingredients ||
+  //   !directions ||
+  //   !price ||
+  //   !category ||
+  //   !quantity ||
+  //   !shipping
+  // ) {
+  //   return res.status(400).json({ error: "All fields are required" });
+  // }
 
   // Split ingredients to store in an array
   if (fields.ingredients) {

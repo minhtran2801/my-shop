@@ -17,7 +17,9 @@ import AddressBook from "./Components/Dashboard/Customer/AddressBook";
 import AdminDashboard from "./Components/Dashboard/Admin/Dashboard";
 import CreateCategory from "./Components/Dashboard/Admin/CreateCategory";
 import CreateProduct from "./Components/Dashboard/Admin/CreateProduct";
+import UpdateProduct from "./Components/Dashboard/Admin/UpdateProduct";
 import Order from "./Components/Dashboard/Admin/Order";
+import Products from "./Components/Dashboard/Admin/Products";
 import OrderDetail from "./Components/Dashboard/Admin/OrderDetail";
 
 import PrivateRoute from "./routes/PrivateRoute";
@@ -92,10 +94,16 @@ const Routes = () => {
           component={CreateProduct}
         />
         <AdminRoute
+          path="/admin/product/update/:productId"
+          exact
+          component={UpdateProduct}
+        />
+        <AdminRoute
           path="/admin/order/:orderId"
           exact
           component={OrderDetail}
         />
+        <AdminRoute path="/admin/products" exact component={Products} />
 
         {/*ERROR ROUTES*/}
         <Route path="*" component={() => "404 NOT FOUND"} />

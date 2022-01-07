@@ -90,6 +90,10 @@ const ChangePassword = () => {
     );
   };
 
+  const onCopyPaste = (event) => {
+    event.preventDefault();
+  };
+
   const PasswordForm = () => {
     return (
       <div className="card mb-5">
@@ -105,12 +109,15 @@ const ChangePassword = () => {
                 Password
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 id="inputPassword"
                 placeholder="Password"
                 value={password}
                 onChange={handleChange("password")}
+                onCopy={onCopyPaste}
+                onPaste={onCopyPaste}
+                onCut={onCopyPaste}
                 required
               />
               <div className="invalid-feedback">Password is required.</div>
@@ -133,12 +140,15 @@ const ChangePassword = () => {
                 Confirm password
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 id="inputConfirmPassword"
                 placeholder="Confirm your password"
                 value={confirm_password}
                 onChange={handleChange("confirm_password")}
+                onCopy={onCopyPaste}
+                onPaste={onCopyPaste}
+                onCut={onCopyPaste}
                 required
               />
               <div className="invalid-feedback">

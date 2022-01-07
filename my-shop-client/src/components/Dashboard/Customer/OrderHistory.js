@@ -43,7 +43,7 @@ const DashboardOrder = () => {
                       <th scope="col" className="text-center">
                         Status
                       </th>
-                      <th scope="col">Edit</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>

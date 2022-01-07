@@ -275,7 +275,7 @@ const Signup = () => {
                   </button>
                   <div className="form-text">
                     <p className="text-center text-muted">
-                      By clicking Register, you agree to our
+                      By clicking Register, you agree to our{" "}
                       <a href="/signin" className="text-primary anchor-link">
                         Privacy Policy
                       </a>
@@ -284,7 +284,7 @@ const Signup = () => {
                 </div>
 
                 <p className="text-center text-muted mt-3 mb-0">
-                  Have already an account?
+                  Have already an account ?{" "}
                   <a href="/signin" className="text-primary anchor-link">
                     Login
                   </a>
